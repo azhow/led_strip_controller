@@ -11,6 +11,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth: 800,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -20,11 +21,13 @@ const createWindow = () => {
     setColor(color_rgb)
   })
 
+  mainWindow.removeMenu()
+
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
@@ -68,6 +71,7 @@ function setColor(color_rgb) {
   
   bat.stderr.on("data", (err) => {
     // Handle error...
+    console.log(`error:\n${err}`);
   });
   
   bat.on("exit", (code) => {

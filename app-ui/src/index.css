@@ -1,1 +1,6 @@
 @import url("./../node_modules/bulma/css/bulma.css");
+@import 'bulma-extensions';
+
+::-webkit-scrollbar {
+    display: none;
+}

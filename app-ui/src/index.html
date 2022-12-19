@@ -16,7 +16,31 @@
         </p>
       </div>
     </section>
-    <div id="color_picker">
-    </div>
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-narrow">
+            <p class="subtitle" for="color_picker" style="text-align: center;">
+              <strong>Color</strong>
+            </p>
+            <div id="color_picker"></div>
+          </div>
+          <div class="is-divider-vertical"></div>
+          <div class="column">
+            <p class="subtitle" for="brightness" style="text-align: center;">
+              <strong>Brightness</strong>
+            </p>
+            <input class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" id="brightness">
+          </div>
+          <div class="is-divider-vertical"></div>
+          <div class="column">
+            <p class="subtitle" for="saturation" style="text-align: center;">
+              <strong>Saturation</strong>
+            </p>
+            <input class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" id="saturation">
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
