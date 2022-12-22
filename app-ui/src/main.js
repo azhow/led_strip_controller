@@ -17,10 +17,6 @@ const createWindow = () => {
     },
   });
 
-  ipcMain.on('set-color', (event, color_rgb) => {
-    setColor(color_rgb)
-  })
-
   mainWindow.removeMenu()
 
   // and load the index.html of the app.
@@ -28,6 +24,16 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  spawnBackendProcess();
+
+  var client = grpc_main(mainWindow);
+
+  ipcMain.on('set-color', (event, color_rgb) => {
+    return new Promise(() => {
+      setColor(client, color_rgb);
+    });
+  });
 };
 
 // This method will be called when Electron has finished
@@ -54,28 +60,58 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-function setColor(color_rgb) {
+function spawnBackendProcess() {
   let spawn = require("child_process").spawn;
 
-  let bat = spawn(".\\..\\.venv\\Scripts\\python.exe", [
-    ".\\..\\main.py",
-    color_rgb.r,
-    color_rgb.g,
-    color_rgb.b,
-  ]);
+  let bat = spawn(".\\..\\.venv\\Scripts\\python.exe", [ ".\\..\\Controller\\main.py" ]);
   
   bat.stdout.on("data", (data) => {
     // Handle data...
-    console.log(`data:\n${data}`);
+    console.log(`Data:\n${data}`);
   });
   
   bat.stderr.on("data", (err) => {
     // Handle error...
-    console.log(`error:\n${err}`);
+    console.log(`Error:\n${err}`);
   });
   
   bat.on("exit", (code) => {
     // Handle exit
-    console.log(`stdout:\n${code}`);
+    console.log(`Stdout:\n${code}`);
+  });
+}
+
+function grpc_main(mainWindow) {
+  var PROTO_PATH = __dirname + '/../../../protoc/test.proto';
+
+  var grpc = require('@grpc/grpc-js');
+  var protoLoader = require('@grpc/proto-loader');
+  var packageDefinition = protoLoader.loadSync(
+      PROTO_PATH,
+      {keepCase: true,
+       longs: String,
+       enums: String,
+       defaults: true,
+       oneofs: true
+      });
+  
+  var hello_proto = grpc.loadPackageDefinition(packageDefinition);
+  
+  var client = new hello_proto.Greeter('localhost:50051', grpc.credentials.createInsecure());
+
+  client.waitForReady(Infinity, (err) => { server_ready(mainWindow, err); });
+
+  return client;
+}
+
+function server_ready(mainWindow, err) {
+  if (!err) {
+    mainWindow.webContents.send('set-server-ready');
+  }
+}
+
+function setColor(client, color_rgb) {
+  client.setColor({rgb_color: [color_rgb.r, color_rgb.g, color_rgb.b]}, function(err, response) {
+    if (err) console.log('Error:', err);
   });
 }

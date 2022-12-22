@@ -1,8 +1,9 @@
 import asyncio
+import queue
+import threading
 from enum import Enum
 from time import sleep
 from bleak import BleakScanner, BleakClient
-
 
 class MexllexLEDStripController:
     class Command(Enum):
@@ -21,7 +22,7 @@ class MexllexLEDStripController:
         UNKNOWN        = 12
 
 
-    def __init__(self, verbose=False):
+    def __init__(self, verbose):
         self.DEVICE_NAME = "DMRRBA-001"
         self.COMMAND_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e"
         self.COMMANDS = {
@@ -40,8 +41,20 @@ class MexllexLEDStripController:
             self.Command.UNKNOWN :        (0x5a0701ff00ff, 6)
         }
 
-        self.DEVICE = asyncio.run(self.discover_device())
+        self.DEVICE = self.discover_device()
         self.VERBOSE = verbose
+        self.queue = queue.Queue()
+        self.client_thread = threading.Thread(target=self._client_function)
+        self.client_thread.start()
+        self.connected = self.client_thread.is_alive()
+
+    def __del__(self):
+        if self.VERBOSE:
+            print("Calling client exit")
+
+        self.queue.put("exit")
+        if self.client_thread.is_alive():
+            self.client_thread.join()
 
     def _serialize_command(self, command_pair):
         return command_pair[0].to_bytes(command_pair[1], 'big')
@@ -57,75 +70,65 @@ class MexllexLEDStripController:
 
         return composed_color.to_bytes(size, 'big')
 
-    async def discover_device(self):
+    def _client_function(self):
+        asyncio.run(self._client_function_internal())
+
+    async def _client_function_internal(self):
+        if self.VERBOSE:
+            print("Starting client")
+
+        try:
+            async with BleakClient(self.DEVICE) as client:
+                while True:
+                    command = self.queue.get()
+
+                    if command == "exit":
+                        return
+
+                    await self.send_command(client, command)
+                    self.queue.task_done()
+        except Exception as e:
+            print("Error: {}".format(e))
+
+        self.connected = False
+
+    def discover_device(self):
         device = None
 
-        devices = await BleakScanner.discover()
+        devices = asyncio.run(BleakScanner.discover())
         for d in devices:
             if d.name == self.DEVICE_NAME:
                 device = d
 
         return device            
 
-    async def send_command(self, command):
-        try:
-            async with BleakClient(self.DEVICE) as client:
-                paired = await client.pair()
+    async def send_command(self, client, command):
+        """Sends a hex number representing a command to the device.
 
-                if (client.is_connected and paired):
-                    await client.write_gatt_char(self.COMMAND_UUID, self._serialize_command(self.COMMANDS[command]))
-                else:
-                    raise Exception("Client not connect or not paired")
+        Args:
+            command (unsigned int): Number representing the command to execute
+
+        Raises:
+            Exception: Fails on device connection failure
+        """
+        try:
+            if (client.is_connected):
+                if self.VERBOSE:
+                    print("Executing command: {0}".format(hex(int.from_bytes(command, 'big'))))
+
+                await client.write_gatt_char(self.COMMAND_UUID, command)
+            else:
+                raise Exception("Client not connected")
 
         except Exception as e:
-            if self.VERBOSE:
-                print("Error: {0}".format(e))
+            print("Error executing command {0}: {1}".format(hex(int.from_bytes(command, 'big')), e))
 
-        finally:
-            await client.disconnect()
-
-    async def commands_test(self):
-        try:
-            async with BleakClient(self.DEVICE) as client:
-                paired = await client.pair()
-
-                if (client.is_connected and paired):
-                    for comm in self.Command:
-                        await client.write_gatt_char(self.COMMAND_UUID, self._serialize_command(self.COMMANDS[comm]))
-                        sleep(0.2)
-                else:
-                    raise Exception("Client not connect or not paired")
-
-        except Exception as e:
-            if self.VERBOSE:
-                print("Error: {0}".format(e))
-
-        finally:
-            await client.disconnect()
-
-    async def set_color(self, color):
-        assert len(color) == 3, "Color has number of channels different than 3 (R,G,B)"
+    def set_color(self, color):
+        assert len(color) == 3, "Color has number of channels different than 3 (R,G,B): {0}".format(color)
         for c in color:
             assert 0 <= c < 256, "Channel outside of valid range [0, 255]"
-
-        try:
-            async with BleakClient(self.DEVICE) as client:
-                paired = await client.pair()
-
-                if (client.is_connected and paired):
-                    command = self._compose_color(color)
-                    if self.VERBOSE:
-                        print("Executing command: {0}".format(hex(int.from_bytes(command, 'big'))))
-                    await client.write_gatt_char(self.COMMAND_UUID, command)
-                else:
-                    raise Exception("Client not connect or not paired")
-
-        except Exception as e:
-            if self.VERBOSE:
-                print("Error: {0}".format(e))
-
-        finally:
-            await client.disconnect()
+        
+        self.queue.put(self._compose_color(color))
 
     async def custom_breathing(self):
         try:
@@ -151,7 +154,3 @@ class MexllexLEDStripController:
         except Exception as e:
             if self.VERBOSE:
                 print("Error: {0}".format(e))
-
-        finally:
-            await client.disconnect()
-

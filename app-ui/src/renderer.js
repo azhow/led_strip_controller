@@ -38,3 +38,9 @@ import * as ReactDOM from 'react-dom/client';
 const color_picker_root = ReactDOM.createRoot(document.getElementById("color_picker"));
 
 color_picker_root.render(<ColorPicker />);
+
+const page_loader = document.getElementById("page_loader");
+
+window.electronAPI.onSetServerReady((_event) => {
+    page_loader.className = "pageloader";
+});
