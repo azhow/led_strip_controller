@@ -40,7 +40,17 @@ const color_picker_root = ReactDOM.createRoot(document.getElementById("color_pic
 color_picker_root.render(<ColorPicker />);
 
 const page_loader = document.getElementById("page_loader");
+const content = document.getElementById("content");
 
-window.electronAPI.onSetServerReady((_event) => {
-    page_loader.className = "pageloader";
+window.electronAPI.onSetServerReady((_event, value) => {
+    if (value)
+    {
+        page_loader.className = "pageloader";
+        content.style = "visibility: visible;"
+    }
+    else 
+    {
+        page_loader.className = "pageloader is-active";
+        content.style = "visibility: hidden;"
+    }
 });

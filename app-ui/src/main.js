@@ -106,7 +106,13 @@ function grpc_main(mainWindow) {
 
 function server_ready(mainWindow, err) {
   if (!err) {
-    mainWindow.webContents.send('set-server-ready');
+    mainWindow.webContents.send('set-server-ready', true);
+  }
+}
+
+function server_not_ready(mainWindow, err) {
+  if (!err) {
+    mainWindow.webContents.send('set-server-ready', false);
   }
 }
 

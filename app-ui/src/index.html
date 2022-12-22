@@ -6,46 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <section class="section">
-      <div class="container">
-        <h1 class="title">
-          Mexllex Bluetooth LED Strip Controller
-        </h1>
-      </div>
-    </section>
+    <div class="pageloader is-active" id="page_loader"><span class="title">Loading Application</span></div>
 
-    <section class="section">
-      <div class="pageloader is-active" id="page_loader"><span class="title">Pageloader</span></div>
-
-      <div class="field">
-        <input id="switchRoundedDefault" type="checkbox" name="switchRoundedDefault" class="switch is-rounded" checked="checked">
-        <label for="switchRoundedDefault">Power Status</label>
-      </div>      
-
-      <div class="container">
-        <div class="columns">
-          <div class="column is-narrow">
-            <p class="subtitle" for="color_picker" style="text-align: center;">
-              <strong>Color</strong>
-            </p>
-            <div id="color_picker"></div>
-          </div>
-          <div class="is-divider-vertical"></div>
-          <div class="column">
-            <p class="subtitle" for="brightness" style="text-align: center;">
-              <strong>Brightness</strong>
-            </p>
-            <input class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" id="brightness">
-          </div>
-          <div class="is-divider-vertical"></div>
-          <div class="column">
-            <p class="subtitle" for="saturation" style="text-align: center;">
-              <strong>Saturation</strong>
-            </p>
-            <input class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" id="saturation">
+    <div id="content" style="visibility: hidden;">
+      <section class="section">
+        <div class="container">
+          <h1 class="title">
+            Mexllex Bluetooth LED Strip Controller
+          </h1>
+        </div>
+      </section>
+  
+      <section class="section">
+        <div class="field">
+          <input id="switchRoundedDefault" type="checkbox" name="switchRoundedDefault" class="switch is-rounded" checked="checked">
+          <label for="switchRoundedDefault">Power Status</label>
+        </div>      
+  
+        <div class="container">
+          <div class="columns">
+            <div class="column is-narrow">
+              <p class="subtitle" for="color_picker" style="text-align: center;">
+                <strong>Color</strong>
+              </p>
+              <div id="color_picker"></div>
+            </div>
+            <div class="is-divider-vertical"></div>
+            <div class="column">
+              <p class="subtitle" for="brightness" style="text-align: center;">
+                <strong>Brightness</strong>
+              </p>
+              <input class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" id="brightness">
+            </div>
+            <div class="is-divider-vertical"></div>
+            <div class="column">
+              <p class="subtitle" for="saturation" style="text-align: center;">
+                <strong>Saturation</strong>
+              </p>
+              <input class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" id="saturation">
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </body>
 </html>
