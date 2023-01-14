@@ -63,7 +63,7 @@ app.on('activate', () => {
 function spawnBackendProcess() {
   let spawn = require("child_process").spawn;
 
-  let bat = spawn(".\\..\\.venv\\Scripts\\python.exe", [ ".\\..\\Controller\\main.py" ]);
+  let bat = spawn(".\\..\\python_env\\Scripts\\python.exe", [ ".\\..\\Controller\\main.py" ]);
   
   bat.stdout.on("data", (data) => {
     // Handle data...

@@ -128,3 +128,5 @@ typings/
 out/
 
 .vscode/*
+
+python_env/*
