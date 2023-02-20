@@ -13,21 +13,21 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cled_controller_service.proto\"\x1b\n\x05\x43olor\x12\x12\n\nrgba_color\x18\x01 \x03(\r\"3\n\x0c\x41vailability\x12#\n\x06status\x18\x01 \x01(\x0e\x32\x13.AvailabilityStatus\"\x07\n\x05\x45mpty*[\n\x12\x41vailabilityStatus\x12\x11\n\rALL_AVAILABLE\x10\x00\x12\x1d\n\x19\x41UDIO_CAPTURE_UNAVAILABLE\x10\x01\x12\x13\n\x0f\x41LL_UNAVAILABLE\x10\x02\x32h\n\rIllumiService\x12\x1a\n\x08SetColor\x12\x06.Color\x1a\x06.Empty\x12\x1a\n\x08GetColor\x12\x06.Empty\x1a\x06.Color\x12\x1f\n\x06Status\x12\x06.Empty\x1a\r.Availabilityb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cled_controller_service.proto\x12\x11\x43ontrollerService\"\x1b\n\x05\x43olor\x12\x12\n\nrgba_color\x18\x01 \x03(\r\"E\n\x0c\x41vailability\x12\x35\n\x06status\x18\x01 \x01(\x0e\x32%.ControllerService.AvailabilityStatus\"\x07\n\x05\x45mpty*[\n\x12\x41vailabilityStatus\x12\x11\n\rALL_AVAILABLE\x10\x00\x12\x1d\n\x19\x41UDIO_CAPTURE_UNAVAILABLE\x10\x01\x12\x13\n\x0f\x41LL_UNAVAILABLE\x10\x02\x32\xd4\x01\n\rLEDController\x12>\n\x08SetColor\x12\x18.ControllerService.Color\x1a\x18.ControllerService.Empty\x12>\n\x08GetColor\x12\x18.ControllerService.Empty\x1a\x18.ControllerService.Color\x12\x43\n\x06Status\x12\x18.ControllerService.Empty\x1a\x1f.ControllerService.Availabilityb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'led_controller_service_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _AVAILABILITYSTATUS._serialized_start=123
-  _AVAILABILITYSTATUS._serialized_end=214
-  _COLOR._serialized_start=32
-  _COLOR._serialized_end=59
-  _AVAILABILITY._serialized_start=61
-  _AVAILABILITY._serialized_end=112
-  _EMPTY._serialized_start=114
-  _EMPTY._serialized_end=121
-  _ILLUMISERVICE._serialized_start=216
-  _ILLUMISERVICE._serialized_end=320
+  _AVAILABILITYSTATUS._serialized_start=160
+  _AVAILABILITYSTATUS._serialized_end=251
+  _COLOR._serialized_start=51
+  _COLOR._serialized_end=78
+  _AVAILABILITY._serialized_start=80
+  _AVAILABILITY._serialized_end=149
+  _EMPTY._serialized_start=151
+  _EMPTY._serialized_end=158
+  _LEDCONTROLLER._serialized_start=254
+  _LEDCONTROLLER._serialized_end=466
 # @@protoc_insertion_point(module_scope)

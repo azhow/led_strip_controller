@@ -7,8 +7,8 @@
 
 void startServer()
 {
-    std::string server_address("0.0.0.0:50052");
-    AudioCaptureService::CaptureService service{ 25868 };
+    std::string server_address("0.0.0.0:42069");
+    AudioCaptureService::CaptureService service{};
 
     grpc::EnableDefaultHealthCheckService(true);
     grpc::reflection::InitProtoReflectionServerBuilderPlugin();

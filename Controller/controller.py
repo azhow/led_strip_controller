@@ -100,7 +100,7 @@ class MexllexLEDStripController:
             if d.name == self.DEVICE_NAME:
                 device = d
 
-        return device            
+        return device
 
     async def _send_command(self, client, command):
         """Sends a hex number representing a command to the device.
@@ -127,7 +127,7 @@ class MexllexLEDStripController:
         assert len(color) == 4, "Color has number of channels different than 4 (R,G,B,A): {0}".format(color)
         for c in color:
             assert 0 <= c < 256, "Channel outside of valid range [0, 255]"
-        
+
         self.queue.put(self._compose_color(color))
 
     async def custom_breathing(self):

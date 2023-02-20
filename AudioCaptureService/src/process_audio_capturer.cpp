@@ -21,7 +21,7 @@ AUDIOCLIENT_ACTIVATION_PARAMS ProcessAudioCapturer::getParams() const
 		.ProcessLoopbackParams =
 			{
 				.TargetProcessId = _pid,
-				.ProcessLoopbackMode = 
+				.ProcessLoopbackMode =
 					PROCESS_LOOPBACK_MODE_INCLUDE_TARGET_PROCESS_TREE,
 			},
 	};
@@ -49,7 +49,7 @@ void ProcessAudioCapturer::initClient()
 	CompletionHandler completionHandler;
 
 	THROW_IF_FAILED(ActivateAudioInterfaceAsync(
-		VIRTUAL_AUDIO_DEVICE_PROCESS_LOOPBACK, __uuidof(IAudioClient), 
+		VIRTUAL_AUDIO_DEVICE_PROCESS_LOOPBACK, __uuidof(IAudioClient),
 		&propvariant, &completionHandler, &asyncOp));
 
 	completionHandler.event_finished.wait();
@@ -64,7 +64,7 @@ void ProcessAudioCapturer::initClient()
 	THROW_IF_FAILED(_client->SetEventHandle(
 		_events[HelperEvents::PacketReady].get()));
 
-	THROW_IF_FAILED(_client->GetService(__uuidof(IAudioCaptureClient), 
+	THROW_IF_FAILED(_client->GetService(__uuidof(IAudioCaptureClient),
 		_captureClient.put_void()));
 }
 
@@ -74,7 +74,7 @@ void ProcessAudioCapturer::forwardPacket()
 	THROW_IF_FAILED(_captureClient->GetNextPacketSize(&packet.nFrames));
 
 	while (packet.nFrames > 0) {
-		THROW_IF_FAILED(_captureClient->GetBuffer(&packet.data, &packet.nFrames, 
+		THROW_IF_FAILED(_captureClient->GetBuffer(&packet.data, &packet.nFrames,
 			(DWORD*)&packet.flags, NULL, &packet.timestamp));
 
 		// Send forward data to processing
@@ -134,7 +134,7 @@ void ProcessAudioCapturer::captureSafe()
 	}
 }
 
-ProcessAudioCapturer::ProcessAudioCapturer() : 
+ProcessAudioCapturer::ProcessAudioCapturer() :
 	_format{ initializeFormat() }
 {
 	for (auto &event : _events)
@@ -150,12 +150,12 @@ WAVEFORMATEX ProcessAudioCapturer::initializeFormat() const
 {
     // get the device enumerator
     IMMDeviceEnumerator* pEnumerator = nullptr;
-    THROW_IF_FAILED( CoCreateInstance(__uuidof(MMDeviceEnumerator), 
+    THROW_IF_FAILED( CoCreateInstance(__uuidof(MMDeviceEnumerator),
 		NULL, CLSCTX_ALL, __uuidof(IMMDeviceEnumerator), (LPVOID*)&pEnumerator));
 
     // get default audio endpoint
     IMMDevice* pDevice = nullptr;
-    THROW_IF_FAILED(pEnumerator->GetDefaultAudioEndpoint(eRender, eMultimedia, 
+    THROW_IF_FAILED(pEnumerator->GetDefaultAudioEndpoint(eRender, eMultimedia,
 		&pDevice));
     IPropertyStore* store = nullptr;
     THROW_IF_FAILED(pDevice->OpenPropertyStore(STGM_READ, &store));
@@ -173,7 +173,7 @@ WAVEFORMATEX ProcessAudioCapturer::initializeFormat() const
     format.nAvgBytesPerSec = format.nSamplesPerSec * _format.nBlockAlign;
     format.wBitsPerSample = CHAR_BIT * sizeof(float);
     format.cbSize = 0;
-    
+
 	return format;
 }
 

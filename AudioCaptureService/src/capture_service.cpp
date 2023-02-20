@@ -4,44 +4,45 @@
 
 using namespace AudioCaptureService;
 
-CaptureService::CaptureService(DWORD pid) :
+CaptureService::CaptureService() :
     _capturer{ std::make_unique<ProcessAudioCapturer>() }
 {
 }
 
 grpc::Status CaptureService::StartCapture(grpc::ServerContext* context,
-    const ProcessToCapture* request, grpc::ServerWriter<AudioPacket>* writer)
+    const AudioService::ProcessToCapture* request,
+    grpc::ServerWriter<AudioService::AudioPacket>* writer)
 {
-    _capturer->startCapture(request->pid(), 
+    _capturer->startCapture(request->pid(),
         [writer, this](auto packet) { this->captureAction(writer, packet); });
 
     return grpc::Status::OK;
 }
 
-grpc::Status CaptureService::StopCapture(grpc::ServerContext* context, 
-    const Empty* request, Empty* response)
+grpc::Status CaptureService::StopCapture(grpc::ServerContext* context,
+    const AudioService::Empty* request, AudioService::Empty* response)
 {
     _capturer->stopCapture();
 
     return grpc::Status::OK;
 }
 
-grpc::Status CaptureService::Status(grpc::ServerContext* context, 
-    const Empty* request, Availability* response)
+grpc::Status CaptureService::Status(grpc::ServerContext* context,
+    const AudioService::Empty* request, AudioService::Availability* response)
 {
     return grpc::Status::OK;
 }
 
 grpc::Status CaptureService::Shutdown(grpc::ServerContext* context,
-    const Empty* request, Empty* response)
+    const AudioService::Empty* request, AudioService::Empty* response)
 {
     return grpc::Status::OK;
 }
 
-AudioPacket CaptureService::convertAudioPacket(
+AudioService::AudioPacket CaptureService::convertAudioPacket(
     ProcessAudioCapturer::AudioPacket src) const
 {
-    AudioPacket out;
+    AudioService::AudioPacket out;
 
     out.set_timestamp(src.timestamp);
     out.set_num_frames(src.nFrames);
@@ -50,7 +51,8 @@ AudioPacket CaptureService::convertAudioPacket(
     return out;
 }
 
-void CaptureService::captureAction(grpc::ServerWriter<AudioPacket>* writer,
+void CaptureService::captureAction(
+    grpc::ServerWriter<AudioService::AudioPacket>* writer,
     ProcessAudioCapturer::AudioPacket packet)
 {
     writer->Write(convertAudioPacket(packet));

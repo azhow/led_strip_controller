@@ -5,7 +5,7 @@ import grpc
 import led_controller_service_pb2 as led__controller__service__pb2
 
 
-class IllumiServiceStub(object):
+class LEDControllerStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,23 +15,23 @@ class IllumiServiceStub(object):
             channel: A grpc.Channel.
         """
         self.SetColor = channel.unary_unary(
-                '/IllumiService/SetColor',
+                '/ControllerService.LEDController/SetColor',
                 request_serializer=led__controller__service__pb2.Color.SerializeToString,
                 response_deserializer=led__controller__service__pb2.Empty.FromString,
                 )
         self.GetColor = channel.unary_unary(
-                '/IllumiService/GetColor',
+                '/ControllerService.LEDController/GetColor',
                 request_serializer=led__controller__service__pb2.Empty.SerializeToString,
                 response_deserializer=led__controller__service__pb2.Color.FromString,
                 )
         self.Status = channel.unary_unary(
-                '/IllumiService/Status',
+                '/ControllerService.LEDController/Status',
                 request_serializer=led__controller__service__pb2.Empty.SerializeToString,
                 response_deserializer=led__controller__service__pb2.Availability.FromString,
                 )
 
 
-class IllumiServiceServicer(object):
+class LEDControllerServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def SetColor(self, request, context):
@@ -53,7 +53,7 @@ class IllumiServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_IllumiServiceServicer_to_server(servicer, server):
+def add_LEDControllerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'SetColor': grpc.unary_unary_rpc_method_handler(
                     servicer.SetColor,
@@ -72,12 +72,12 @@ def add_IllumiServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'IllumiService', rpc_method_handlers)
+            'ControllerService.LEDController', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class IllumiService(object):
+class LEDController(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -91,7 +91,7 @@ class IllumiService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/IllumiService/SetColor',
+        return grpc.experimental.unary_unary(request, target, '/ControllerService.LEDController/SetColor',
             led__controller__service__pb2.Color.SerializeToString,
             led__controller__service__pb2.Empty.FromString,
             options, channel_credentials,
@@ -108,7 +108,7 @@ class IllumiService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/IllumiService/GetColor',
+        return grpc.experimental.unary_unary(request, target, '/ControllerService.LEDController/GetColor',
             led__controller__service__pb2.Empty.SerializeToString,
             led__controller__service__pb2.Color.FromString,
             options, channel_credentials,
@@ -125,7 +125,7 @@ class IllumiService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/IllumiService/Status',
+        return grpc.experimental.unary_unary(request, target, '/ControllerService.LEDController/Status',
             led__controller__service__pb2.Empty.SerializeToString,
             led__controller__service__pb2.Availability.FromString,
             options, channel_credentials,

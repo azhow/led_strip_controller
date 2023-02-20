@@ -16,7 +16,7 @@
 #include <wrl/implements.h>
 #include <wil/com.h>
 
-namespace AudioCaptureService 
+namespace AudioCaptureService
 {
     class ProcessAudioCapturer
     {
@@ -39,7 +39,7 @@ namespace AudioCaptureService
 
     private:
         struct CompletionHandler : public Microsoft::WRL::RuntimeClass<
-            Microsoft::WRL::RuntimeClassFlags<Microsoft::WRL::ClassicCom>, 
+            Microsoft::WRL::RuntimeClassFlags<Microsoft::WRL::ClassicCom>,
             Microsoft::WRL::FtmBase, IActivateAudioInterfaceCompletionHandler>
         {
             wil::com_ptr<IAudioClient> client;
@@ -54,7 +54,7 @@ namespace AudioCaptureService
             {
                 auto set_finished = event_finished.SetEvent_scope_exit();
 
-                RETURN_IF_FAILED(operation->GetActivateResult(&activate_hr, 
+                RETURN_IF_FAILED(operation->GetActivateResult(&activate_hr,
                     client.put_unknown()));
 
                 //if (FAILED(activate_hr))
@@ -77,7 +77,7 @@ namespace AudioCaptureService
         wil::com_ptr<IAudioCaptureClient> _captureClient;
         std::array<wil::unique_event, HelperEvents::Count> _events;
         WAVEFORMATEX _format;
-        
+
         std::uint32_t _pid;
         std::function<void(AudioPacket)> _captureAction;
         std::thread _captureThread;

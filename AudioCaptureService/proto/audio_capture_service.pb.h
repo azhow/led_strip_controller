@@ -46,6 +46,7 @@ struct TableStruct_audio_5fcapture_5fservice_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_audio_5fcapture_5fservice_2eproto;
+namespace AudioService {
 class AudioPacket;
 struct AudioPacketDefaultTypeInternal;
 extern AudioPacketDefaultTypeInternal _AudioPacket_default_instance_;
@@ -58,12 +59,14 @@ extern EmptyDefaultTypeInternal _Empty_default_instance_;
 class ProcessToCapture;
 struct ProcessToCaptureDefaultTypeInternal;
 extern ProcessToCaptureDefaultTypeInternal _ProcessToCapture_default_instance_;
+}  // namespace AudioService
 PROTOBUF_NAMESPACE_OPEN
-template<> ::AudioPacket* Arena::CreateMaybeMessage<::AudioPacket>(Arena*);
-template<> ::Availability* Arena::CreateMaybeMessage<::Availability>(Arena*);
-template<> ::Empty* Arena::CreateMaybeMessage<::Empty>(Arena*);
-template<> ::ProcessToCapture* Arena::CreateMaybeMessage<::ProcessToCapture>(Arena*);
+template<> ::AudioService::AudioPacket* Arena::CreateMaybeMessage<::AudioService::AudioPacket>(Arena*);
+template<> ::AudioService::Availability* Arena::CreateMaybeMessage<::AudioService::Availability>(Arena*);
+template<> ::AudioService::Empty* Arena::CreateMaybeMessage<::AudioService::Empty>(Arena*);
+template<> ::AudioService::ProcessToCapture* Arena::CreateMaybeMessage<::AudioService::ProcessToCapture>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
+namespace AudioService {
 
 enum AvailabilityStatus : int {
   AVAILABLE = 0,
@@ -93,7 +96,7 @@ inline bool AvailabilityStatus_Parse(
 // ===================================================================
 
 class ProcessToCapture final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProcessToCapture) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:AudioService.ProcessToCapture) */ {
  public:
   inline ProcessToCapture() : ProcessToCapture(nullptr) {}
   ~ProcessToCapture() override;
@@ -196,7 +199,7 @@ class ProcessToCapture final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "ProcessToCapture";
+    return "AudioService.ProcessToCapture";
   }
   protected:
   explicit ProcessToCapture(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -224,7 +227,7 @@ class ProcessToCapture final :
   void _internal_set_pid(uint32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:ProcessToCapture)
+  // @@protoc_insertion_point(class_scope:AudioService.ProcessToCapture)
  private:
   class _Internal;
 
@@ -241,7 +244,7 @@ class ProcessToCapture final :
 // -------------------------------------------------------------------
 
 class AudioPacket final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:AudioPacket) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:AudioService.AudioPacket) */ {
  public:
   inline AudioPacket() : AudioPacket(nullptr) {}
   ~AudioPacket() override;
@@ -344,7 +347,7 @@ class AudioPacket final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "AudioPacket";
+    return "AudioService.AudioPacket";
   }
   protected:
   explicit AudioPacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -397,7 +400,7 @@ class AudioPacket final :
   void _internal_set_num_frames(uint32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:AudioPacket)
+  // @@protoc_insertion_point(class_scope:AudioService.AudioPacket)
  private:
   class _Internal;
 
@@ -416,7 +419,7 @@ class AudioPacket final :
 // -------------------------------------------------------------------
 
 class Availability final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Availability) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:AudioService.Availability) */ {
  public:
   inline Availability() : Availability(nullptr) {}
   ~Availability() override;
@@ -519,7 +522,7 @@ class Availability final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Availability";
+    return "AudioService.Availability";
   }
   protected:
   explicit Availability(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -538,16 +541,16 @@ class Availability final :
   enum : int {
     kStatusFieldNumber = 1,
   };
-  // .AvailabilityStatus status = 1;
+  // .AudioService.AvailabilityStatus status = 1;
   void clear_status();
-  ::AvailabilityStatus status() const;
-  void set_status(::AvailabilityStatus value);
+  ::AudioService::AvailabilityStatus status() const;
+  void set_status(::AudioService::AvailabilityStatus value);
   private:
-  ::AvailabilityStatus _internal_status() const;
-  void _internal_set_status(::AvailabilityStatus value);
+  ::AudioService::AvailabilityStatus _internal_status() const;
+  void _internal_set_status(::AudioService::AvailabilityStatus value);
   public:
 
-  // @@protoc_insertion_point(class_scope:Availability)
+  // @@protoc_insertion_point(class_scope:AudioService.Availability)
  private:
   class _Internal;
 
@@ -564,7 +567,7 @@ class Availability final :
 // -------------------------------------------------------------------
 
 class Empty final :
-    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:Empty) */ {
+    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:AudioService.Empty) */ {
  public:
   inline Empty() : Empty(nullptr) {}
   explicit PROTOBUF_CONSTEXPR Empty(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
@@ -652,7 +655,7 @@ class Empty final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Empty";
+    return "AudioService.Empty";
   }
   protected:
   explicit Empty(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -668,7 +671,7 @@ class Empty final :
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:Empty)
+  // @@protoc_insertion_point(class_scope:AudioService.Empty)
  private:
   class _Internal;
 
@@ -698,7 +701,7 @@ inline uint32_t ProcessToCapture::_internal_pid() const {
   return _impl_.pid_;
 }
 inline uint32_t ProcessToCapture::pid() const {
-  // @@protoc_insertion_point(field_get:ProcessToCapture.pid)
+  // @@protoc_insertion_point(field_get:AudioService.ProcessToCapture.pid)
   return _internal_pid();
 }
 inline void ProcessToCapture::_internal_set_pid(uint32_t value) {
@@ -707,7 +710,7 @@ inline void ProcessToCapture::_internal_set_pid(uint32_t value) {
 }
 inline void ProcessToCapture::set_pid(uint32_t value) {
   _internal_set_pid(value);
-  // @@protoc_insertion_point(field_set:ProcessToCapture.pid)
+  // @@protoc_insertion_point(field_set:AudioService.ProcessToCapture.pid)
 }
 
 // -------------------------------------------------------------------
@@ -722,7 +725,7 @@ inline uint64_t AudioPacket::_internal_timestamp() const {
   return _impl_.timestamp_;
 }
 inline uint64_t AudioPacket::timestamp() const {
-  // @@protoc_insertion_point(field_get:AudioPacket.timestamp)
+  // @@protoc_insertion_point(field_get:AudioService.AudioPacket.timestamp)
   return _internal_timestamp();
 }
 inline void AudioPacket::_internal_set_timestamp(uint64_t value) {
@@ -731,7 +734,7 @@ inline void AudioPacket::_internal_set_timestamp(uint64_t value) {
 }
 inline void AudioPacket::set_timestamp(uint64_t value) {
   _internal_set_timestamp(value);
-  // @@protoc_insertion_point(field_set:AudioPacket.timestamp)
+  // @@protoc_insertion_point(field_set:AudioService.AudioPacket.timestamp)
 }
 
 // uint32 num_frames = 2;
@@ -742,7 +745,7 @@ inline uint32_t AudioPacket::_internal_num_frames() const {
   return _impl_.num_frames_;
 }
 inline uint32_t AudioPacket::num_frames() const {
-  // @@protoc_insertion_point(field_get:AudioPacket.num_frames)
+  // @@protoc_insertion_point(field_get:AudioService.AudioPacket.num_frames)
   return _internal_num_frames();
 }
 inline void AudioPacket::_internal_set_num_frames(uint32_t value) {
@@ -751,7 +754,7 @@ inline void AudioPacket::_internal_set_num_frames(uint32_t value) {
 }
 inline void AudioPacket::set_num_frames(uint32_t value) {
   _internal_set_num_frames(value);
-  // @@protoc_insertion_point(field_set:AudioPacket.num_frames)
+  // @@protoc_insertion_point(field_set:AudioService.AudioPacket.num_frames)
 }
 
 // bytes captured_audio = 3;
@@ -759,7 +762,7 @@ inline void AudioPacket::clear_captured_audio() {
   _impl_.captured_audio_.ClearToEmpty();
 }
 inline const std::string& AudioPacket::captured_audio() const {
-  // @@protoc_insertion_point(field_get:AudioPacket.captured_audio)
+  // @@protoc_insertion_point(field_get:AudioService.AudioPacket.captured_audio)
   return _internal_captured_audio();
 }
 template <typename ArgT0, typename... ArgT>
@@ -767,11 +770,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void AudioPacket::set_captured_audio(ArgT0&& arg0, ArgT... args) {
  
  _impl_.captured_audio_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:AudioPacket.captured_audio)
+  // @@protoc_insertion_point(field_set:AudioService.AudioPacket.captured_audio)
 }
 inline std::string* AudioPacket::mutable_captured_audio() {
   std::string* _s = _internal_mutable_captured_audio();
-  // @@protoc_insertion_point(field_mutable:AudioPacket.captured_audio)
+  // @@protoc_insertion_point(field_mutable:AudioService.AudioPacket.captured_audio)
   return _s;
 }
 inline const std::string& AudioPacket::_internal_captured_audio() const {
@@ -786,7 +789,7 @@ inline std::string* AudioPacket::_internal_mutable_captured_audio() {
   return _impl_.captured_audio_.Mutable(GetArenaForAllocation());
 }
 inline std::string* AudioPacket::release_captured_audio() {
-  // @@protoc_insertion_point(field_release:AudioPacket.captured_audio)
+  // @@protoc_insertion_point(field_release:AudioService.AudioPacket.captured_audio)
   return _impl_.captured_audio_.Release();
 }
 inline void AudioPacket::set_allocated_captured_audio(std::string* captured_audio) {
@@ -801,31 +804,31 @@ inline void AudioPacket::set_allocated_captured_audio(std::string* captured_audi
     _impl_.captured_audio_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:AudioPacket.captured_audio)
+  // @@protoc_insertion_point(field_set_allocated:AudioService.AudioPacket.captured_audio)
 }
 
 // -------------------------------------------------------------------
 
 // Availability
 
-// .AvailabilityStatus status = 1;
+// .AudioService.AvailabilityStatus status = 1;
 inline void Availability::clear_status() {
   _impl_.status_ = 0;
 }
-inline ::AvailabilityStatus Availability::_internal_status() const {
-  return static_cast< ::AvailabilityStatus >(_impl_.status_);
+inline ::AudioService::AvailabilityStatus Availability::_internal_status() const {
+  return static_cast< ::AudioService::AvailabilityStatus >(_impl_.status_);
 }
-inline ::AvailabilityStatus Availability::status() const {
-  // @@protoc_insertion_point(field_get:Availability.status)
+inline ::AudioService::AvailabilityStatus Availability::status() const {
+  // @@protoc_insertion_point(field_get:AudioService.Availability.status)
   return _internal_status();
 }
-inline void Availability::_internal_set_status(::AvailabilityStatus value) {
+inline void Availability::_internal_set_status(::AudioService::AvailabilityStatus value) {
   
   _impl_.status_ = value;
 }
-inline void Availability::set_status(::AvailabilityStatus value) {
+inline void Availability::set_status(::AudioService::AvailabilityStatus value) {
   _internal_set_status(value);
-  // @@protoc_insertion_point(field_set:Availability.status)
+  // @@protoc_insertion_point(field_set:AudioService.Availability.status)
 }
 
 // -------------------------------------------------------------------
@@ -844,13 +847,14 @@ inline void Availability::set_status(::AvailabilityStatus value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
+}  // namespace AudioService
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::AvailabilityStatus> : ::std::true_type {};
+template <> struct is_proto_enum< ::AudioService::AvailabilityStatus> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::AvailabilityStatus>() {
-  return ::AvailabilityStatus_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::AudioService::AvailabilityStatus>() {
+  return ::AudioService::AvailabilityStatus_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

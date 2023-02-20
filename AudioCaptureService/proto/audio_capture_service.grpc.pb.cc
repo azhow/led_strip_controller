@@ -19,184 +19,187 @@
 #include <grpcpp/server_context.h>
 #include <grpcpp/impl/service_type.h>
 #include <grpcpp/support/sync_stream.h>
+namespace AudioService {
 
-static const char* AudioCapture_method_names[] = {
-  "/AudioCapture/StartCapture",
-  "/AudioCapture/StopCapture",
-  "/AudioCapture/Status",
-  "/AudioCapture/Shutdown",
+static const char* AudioCapturer_method_names[] = {
+  "/AudioService.AudioCapturer/StartCapture",
+  "/AudioService.AudioCapturer/StopCapture",
+  "/AudioService.AudioCapturer/Status",
+  "/AudioService.AudioCapturer/Shutdown",
 };
 
-std::unique_ptr< AudioCapture::Stub> AudioCapture::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+std::unique_ptr< AudioCapturer::Stub> AudioCapturer::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
   (void)options;
-  std::unique_ptr< AudioCapture::Stub> stub(new AudioCapture::Stub(channel, options));
+  std::unique_ptr< AudioCapturer::Stub> stub(new AudioCapturer::Stub(channel, options));
   return stub;
 }
 
-AudioCapture::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_StartCapture_(AudioCapture_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
-  , rpcmethod_StopCapture_(AudioCapture_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_Status_(AudioCapture_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_Shutdown_(AudioCapture_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+AudioCapturer::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
+  : channel_(channel), rpcmethod_StartCapture_(AudioCapturer_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  , rpcmethod_StopCapture_(AudioCapturer_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Status_(AudioCapturer_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Shutdown_(AudioCapturer_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::ClientReader< ::AudioPacket>* AudioCapture::Stub::StartCaptureRaw(::grpc::ClientContext* context, const ::ProcessToCapture& request) {
-  return ::grpc::internal::ClientReaderFactory< ::AudioPacket>::Create(channel_.get(), rpcmethod_StartCapture_, context, request);
+::grpc::ClientReader< ::AudioService::AudioPacket>* AudioCapturer::Stub::StartCaptureRaw(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request) {
+  return ::grpc::internal::ClientReaderFactory< ::AudioService::AudioPacket>::Create(channel_.get(), rpcmethod_StartCapture_, context, request);
 }
 
-void AudioCapture::Stub::async::StartCapture(::grpc::ClientContext* context, const ::ProcessToCapture* request, ::grpc::ClientReadReactor< ::AudioPacket>* reactor) {
-  ::grpc::internal::ClientCallbackReaderFactory< ::AudioPacket>::Create(stub_->channel_.get(), stub_->rpcmethod_StartCapture_, context, request, reactor);
+void AudioCapturer::Stub::async::StartCapture(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture* request, ::grpc::ClientReadReactor< ::AudioService::AudioPacket>* reactor) {
+  ::grpc::internal::ClientCallbackReaderFactory< ::AudioService::AudioPacket>::Create(stub_->channel_.get(), stub_->rpcmethod_StartCapture_, context, request, reactor);
 }
 
-::grpc::ClientAsyncReader< ::AudioPacket>* AudioCapture::Stub::AsyncStartCaptureRaw(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) {
-  return ::grpc::internal::ClientAsyncReaderFactory< ::AudioPacket>::Create(channel_.get(), cq, rpcmethod_StartCapture_, context, request, true, tag);
+::grpc::ClientAsyncReader< ::AudioService::AudioPacket>* AudioCapturer::Stub::AsyncStartCaptureRaw(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::AudioService::AudioPacket>::Create(channel_.get(), cq, rpcmethod_StartCapture_, context, request, true, tag);
 }
 
-::grpc::ClientAsyncReader< ::AudioPacket>* AudioCapture::Stub::PrepareAsyncStartCaptureRaw(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncReaderFactory< ::AudioPacket>::Create(channel_.get(), cq, rpcmethod_StartCapture_, context, request, false, nullptr);
+::grpc::ClientAsyncReader< ::AudioService::AudioPacket>* AudioCapturer::Stub::PrepareAsyncStartCaptureRaw(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::AudioService::AudioPacket>::Create(channel_.get(), cq, rpcmethod_StartCapture_, context, request, false, nullptr);
 }
 
-::grpc::Status AudioCapture::Stub::StopCapture(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_StopCapture_, context, request, response);
+::grpc::Status AudioCapturer::Stub::StopCapture(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::AudioService::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::AudioService::Empty, ::AudioService::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_StopCapture_, context, request, response);
 }
 
-void AudioCapture::Stub::async::StopCapture(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_StopCapture_, context, request, response, std::move(f));
+void AudioCapturer::Stub::async::StopCapture(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::AudioService::Empty, ::AudioService::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_StopCapture_, context, request, response, std::move(f));
 }
 
-void AudioCapture::Stub::async::StopCapture(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) {
+void AudioCapturer::Stub::async::StopCapture(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_StopCapture_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::Empty>* AudioCapture::Stub::PrepareAsyncStopCaptureRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_StopCapture_, context, request);
+::grpc::ClientAsyncResponseReader< ::AudioService::Empty>* AudioCapturer::Stub::PrepareAsyncStopCaptureRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::AudioService::Empty, ::AudioService::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_StopCapture_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::Empty>* AudioCapture::Stub::AsyncStopCaptureRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::AudioService::Empty>* AudioCapturer::Stub::AsyncStopCaptureRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncStopCaptureRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status AudioCapture::Stub::Status(::grpc::ClientContext* context, const ::Empty& request, ::Availability* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::Empty, ::Availability, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Status_, context, request, response);
+::grpc::Status AudioCapturer::Stub::Status(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::AudioService::Availability* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::AudioService::Empty, ::AudioService::Availability, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Status_, context, request, response);
 }
 
-void AudioCapture::Stub::async::Status(::grpc::ClientContext* context, const ::Empty* request, ::Availability* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::Empty, ::Availability, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Status_, context, request, response, std::move(f));
+void AudioCapturer::Stub::async::Status(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Availability* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::AudioService::Empty, ::AudioService::Availability, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Status_, context, request, response, std::move(f));
 }
 
-void AudioCapture::Stub::async::Status(::grpc::ClientContext* context, const ::Empty* request, ::Availability* response, ::grpc::ClientUnaryReactor* reactor) {
+void AudioCapturer::Stub::async::Status(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Availability* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Status_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::Availability>* AudioCapture::Stub::PrepareAsyncStatusRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Availability, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Status_, context, request);
+::grpc::ClientAsyncResponseReader< ::AudioService::Availability>* AudioCapturer::Stub::PrepareAsyncStatusRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::AudioService::Availability, ::AudioService::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Status_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::Availability>* AudioCapture::Stub::AsyncStatusRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::AudioService::Availability>* AudioCapturer::Stub::AsyncStatusRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncStatusRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status AudioCapture::Stub::Shutdown(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Shutdown_, context, request, response);
+::grpc::Status AudioCapturer::Stub::Shutdown(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::AudioService::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::AudioService::Empty, ::AudioService::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Shutdown_, context, request, response);
 }
 
-void AudioCapture::Stub::async::Shutdown(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Shutdown_, context, request, response, std::move(f));
+void AudioCapturer::Stub::async::Shutdown(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::AudioService::Empty, ::AudioService::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Shutdown_, context, request, response, std::move(f));
 }
 
-void AudioCapture::Stub::async::Shutdown(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) {
+void AudioCapturer::Stub::async::Shutdown(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Shutdown_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::Empty>* AudioCapture::Stub::PrepareAsyncShutdownRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Shutdown_, context, request);
+::grpc::ClientAsyncResponseReader< ::AudioService::Empty>* AudioCapturer::Stub::PrepareAsyncShutdownRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::AudioService::Empty, ::AudioService::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Shutdown_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::Empty>* AudioCapture::Stub::AsyncShutdownRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::AudioService::Empty>* AudioCapturer::Stub::AsyncShutdownRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncShutdownRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-AudioCapture::Service::Service() {
+AudioCapturer::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      AudioCapture_method_names[0],
+      AudioCapturer_method_names[0],
       ::grpc::internal::RpcMethod::SERVER_STREAMING,
-      new ::grpc::internal::ServerStreamingHandler< AudioCapture::Service, ::ProcessToCapture, ::AudioPacket>(
-          [](AudioCapture::Service* service,
+      new ::grpc::internal::ServerStreamingHandler< AudioCapturer::Service, ::AudioService::ProcessToCapture, ::AudioService::AudioPacket>(
+          [](AudioCapturer::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::ProcessToCapture* req,
-             ::grpc::ServerWriter<::AudioPacket>* writer) {
+             const ::AudioService::ProcessToCapture* req,
+             ::grpc::ServerWriter<::AudioService::AudioPacket>* writer) {
                return service->StartCapture(ctx, req, writer);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      AudioCapture_method_names[1],
+      AudioCapturer_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< AudioCapture::Service, ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](AudioCapture::Service* service,
+      new ::grpc::internal::RpcMethodHandler< AudioCapturer::Service, ::AudioService::Empty, ::AudioService::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](AudioCapturer::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::Empty* req,
-             ::Empty* resp) {
+             const ::AudioService::Empty* req,
+             ::AudioService::Empty* resp) {
                return service->StopCapture(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      AudioCapture_method_names[2],
+      AudioCapturer_method_names[2],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< AudioCapture::Service, ::Empty, ::Availability, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](AudioCapture::Service* service,
+      new ::grpc::internal::RpcMethodHandler< AudioCapturer::Service, ::AudioService::Empty, ::AudioService::Availability, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](AudioCapturer::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::Empty* req,
-             ::Availability* resp) {
+             const ::AudioService::Empty* req,
+             ::AudioService::Availability* resp) {
                return service->Status(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      AudioCapture_method_names[3],
+      AudioCapturer_method_names[3],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< AudioCapture::Service, ::Empty, ::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](AudioCapture::Service* service,
+      new ::grpc::internal::RpcMethodHandler< AudioCapturer::Service, ::AudioService::Empty, ::AudioService::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](AudioCapturer::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::Empty* req,
-             ::Empty* resp) {
+             const ::AudioService::Empty* req,
+             ::AudioService::Empty* resp) {
                return service->Shutdown(ctx, req, resp);
              }, this)));
 }
 
-AudioCapture::Service::~Service() {
+AudioCapturer::Service::~Service() {
 }
 
-::grpc::Status AudioCapture::Service::StartCapture(::grpc::ServerContext* context, const ::ProcessToCapture* request, ::grpc::ServerWriter< ::AudioPacket>* writer) {
+::grpc::Status AudioCapturer::Service::StartCapture(::grpc::ServerContext* context, const ::AudioService::ProcessToCapture* request, ::grpc::ServerWriter< ::AudioService::AudioPacket>* writer) {
   (void) context;
   (void) request;
   (void) writer;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status AudioCapture::Service::StopCapture(::grpc::ServerContext* context, const ::Empty* request, ::Empty* response) {
+::grpc::Status AudioCapturer::Service::StopCapture(::grpc::ServerContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status AudioCapture::Service::Status(::grpc::ServerContext* context, const ::Empty* request, ::Availability* response) {
+::grpc::Status AudioCapturer::Service::Status(::grpc::ServerContext* context, const ::AudioService::Empty* request, ::AudioService::Availability* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status AudioCapture::Service::Shutdown(::grpc::ServerContext* context, const ::Empty* request, ::Empty* response) {
+::grpc::Status AudioCapturer::Service::Shutdown(::grpc::ServerContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
+
+}  // namespace AudioService
 

@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-service IllumiService {
+package ControllerService;
+
+service LEDController {
   rpc SetColor(Color) returns (Empty);
   rpc GetColor(Empty) returns (Color);
   rpc Status(Empty) returns (Availability);

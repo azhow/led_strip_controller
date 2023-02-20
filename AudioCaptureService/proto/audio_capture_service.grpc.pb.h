@@ -25,113 +25,115 @@
 #include <grpcpp/support/stub_options.h>
 #include <grpcpp/support/sync_stream.h>
 
+namespace AudioService {
+
 // The greeting service definition.
-class AudioCapture final {
+class AudioCapturer final {
  public:
   static constexpr char const* service_full_name() {
-    return "AudioCapture";
+    return "AudioService.AudioCapturer";
   }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    std::unique_ptr< ::grpc::ClientReaderInterface< ::AudioPacket>> StartCapture(::grpc::ClientContext* context, const ::ProcessToCapture& request) {
-      return std::unique_ptr< ::grpc::ClientReaderInterface< ::AudioPacket>>(StartCaptureRaw(context, request));
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::AudioService::AudioPacket>> StartCapture(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::AudioService::AudioPacket>>(StartCaptureRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::AudioPacket>> AsyncStartCapture(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::AudioPacket>>(AsyncStartCaptureRaw(context, request, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::AudioService::AudioPacket>> AsyncStartCapture(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::AudioService::AudioPacket>>(AsyncStartCaptureRaw(context, request, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::AudioPacket>> PrepareAsyncStartCapture(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::AudioPacket>>(PrepareAsyncStartCaptureRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::AudioService::AudioPacket>> PrepareAsyncStartCapture(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::AudioService::AudioPacket>>(PrepareAsyncStartCaptureRaw(context, request, cq));
     }
-    virtual ::grpc::Status StopCapture(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> AsyncStopCapture(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(AsyncStopCaptureRaw(context, request, cq));
+    virtual ::grpc::Status StopCapture(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::AudioService::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>> AsyncStopCapture(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>>(AsyncStopCaptureRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> PrepareAsyncStopCapture(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(PrepareAsyncStopCaptureRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>> PrepareAsyncStopCapture(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>>(PrepareAsyncStopCaptureRaw(context, request, cq));
     }
-    virtual ::grpc::Status Status(::grpc::ClientContext* context, const ::Empty& request, ::Availability* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Availability>> AsyncStatus(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Availability>>(AsyncStatusRaw(context, request, cq));
+    virtual ::grpc::Status Status(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::AudioService::Availability* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Availability>> AsyncStatus(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Availability>>(AsyncStatusRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Availability>> PrepareAsyncStatus(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Availability>>(PrepareAsyncStatusRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Availability>> PrepareAsyncStatus(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Availability>>(PrepareAsyncStatusRaw(context, request, cq));
     }
-    virtual ::grpc::Status Shutdown(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> AsyncShutdown(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(AsyncShutdownRaw(context, request, cq));
+    virtual ::grpc::Status Shutdown(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::AudioService::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>> AsyncShutdown(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>>(AsyncShutdownRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>> PrepareAsyncShutdown(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Empty>>(PrepareAsyncShutdownRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>> PrepareAsyncShutdown(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>>(PrepareAsyncShutdownRaw(context, request, cq));
     }
     class async_interface {
      public:
       virtual ~async_interface() {}
-      virtual void StartCapture(::grpc::ClientContext* context, const ::ProcessToCapture* request, ::grpc::ClientReadReactor< ::AudioPacket>* reactor) = 0;
-      virtual void StopCapture(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void StopCapture(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void Status(::grpc::ClientContext* context, const ::Empty* request, ::Availability* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Status(::grpc::ClientContext* context, const ::Empty* request, ::Availability* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void Shutdown(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Shutdown(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void StartCapture(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture* request, ::grpc::ClientReadReactor< ::AudioService::AudioPacket>* reactor) = 0;
+      virtual void StopCapture(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void StopCapture(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void Status(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Availability* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Status(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Availability* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void Shutdown(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Shutdown(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientReaderInterface< ::AudioPacket>* StartCaptureRaw(::grpc::ClientContext* context, const ::ProcessToCapture& request) = 0;
-    virtual ::grpc::ClientAsyncReaderInterface< ::AudioPacket>* AsyncStartCaptureRaw(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
-    virtual ::grpc::ClientAsyncReaderInterface< ::AudioPacket>* PrepareAsyncStartCaptureRaw(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* AsyncStopCaptureRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* PrepareAsyncStopCaptureRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Availability>* AsyncStatusRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Availability>* PrepareAsyncStatusRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* AsyncShutdownRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Empty>* PrepareAsyncShutdownRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::AudioService::AudioPacket>* StartCaptureRaw(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::AudioService::AudioPacket>* AsyncStartCaptureRaw(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::AudioService::AudioPacket>* PrepareAsyncStartCaptureRaw(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>* AsyncStopCaptureRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>* PrepareAsyncStopCaptureRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Availability>* AsyncStatusRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Availability>* PrepareAsyncStatusRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>* AsyncShutdownRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::AudioService::Empty>* PrepareAsyncShutdownRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    std::unique_ptr< ::grpc::ClientReader< ::AudioPacket>> StartCapture(::grpc::ClientContext* context, const ::ProcessToCapture& request) {
-      return std::unique_ptr< ::grpc::ClientReader< ::AudioPacket>>(StartCaptureRaw(context, request));
+    std::unique_ptr< ::grpc::ClientReader< ::AudioService::AudioPacket>> StartCapture(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::AudioService::AudioPacket>>(StartCaptureRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReader< ::AudioPacket>> AsyncStartCapture(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReader< ::AudioPacket>>(AsyncStartCaptureRaw(context, request, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::AudioService::AudioPacket>> AsyncStartCapture(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::AudioService::AudioPacket>>(AsyncStartCaptureRaw(context, request, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReader< ::AudioPacket>> PrepareAsyncStartCapture(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReader< ::AudioPacket>>(PrepareAsyncStartCaptureRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::AudioService::AudioPacket>> PrepareAsyncStartCapture(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::AudioService::AudioPacket>>(PrepareAsyncStartCaptureRaw(context, request, cq));
     }
-    ::grpc::Status StopCapture(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> AsyncStopCapture(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(AsyncStopCaptureRaw(context, request, cq));
+    ::grpc::Status StopCapture(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::AudioService::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>> AsyncStopCapture(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>>(AsyncStopCaptureRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> PrepareAsyncStopCapture(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(PrepareAsyncStopCaptureRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>> PrepareAsyncStopCapture(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>>(PrepareAsyncStopCaptureRaw(context, request, cq));
     }
-    ::grpc::Status Status(::grpc::ClientContext* context, const ::Empty& request, ::Availability* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Availability>> AsyncStatus(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Availability>>(AsyncStatusRaw(context, request, cq));
+    ::grpc::Status Status(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::AudioService::Availability* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Availability>> AsyncStatus(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Availability>>(AsyncStatusRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Availability>> PrepareAsyncStatus(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Availability>>(PrepareAsyncStatusRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Availability>> PrepareAsyncStatus(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Availability>>(PrepareAsyncStatusRaw(context, request, cq));
     }
-    ::grpc::Status Shutdown(::grpc::ClientContext* context, const ::Empty& request, ::Empty* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> AsyncShutdown(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(AsyncShutdownRaw(context, request, cq));
+    ::grpc::Status Shutdown(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::AudioService::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>> AsyncShutdown(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>>(AsyncShutdownRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>> PrepareAsyncShutdown(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Empty>>(PrepareAsyncShutdownRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>> PrepareAsyncShutdown(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>>(PrepareAsyncShutdownRaw(context, request, cq));
     }
     class async final :
       public StubInterface::async_interface {
      public:
-      void StartCapture(::grpc::ClientContext* context, const ::ProcessToCapture* request, ::grpc::ClientReadReactor< ::AudioPacket>* reactor) override;
-      void StopCapture(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)>) override;
-      void StopCapture(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void Status(::grpc::ClientContext* context, const ::Empty* request, ::Availability* response, std::function<void(::grpc::Status)>) override;
-      void Status(::grpc::ClientContext* context, const ::Empty* request, ::Availability* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void Shutdown(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, std::function<void(::grpc::Status)>) override;
-      void Shutdown(::grpc::ClientContext* context, const ::Empty* request, ::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void StartCapture(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture* request, ::grpc::ClientReadReactor< ::AudioService::AudioPacket>* reactor) override;
+      void StopCapture(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, std::function<void(::grpc::Status)>) override;
+      void StopCapture(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void Status(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Availability* response, std::function<void(::grpc::Status)>) override;
+      void Status(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Availability* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void Shutdown(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, std::function<void(::grpc::Status)>) override;
+      void Shutdown(::grpc::ClientContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -143,15 +145,15 @@ class AudioCapture final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientReader< ::AudioPacket>* StartCaptureRaw(::grpc::ClientContext* context, const ::ProcessToCapture& request) override;
-    ::grpc::ClientAsyncReader< ::AudioPacket>* AsyncStartCaptureRaw(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) override;
-    ::grpc::ClientAsyncReader< ::AudioPacket>* PrepareAsyncStartCaptureRaw(::grpc::ClientContext* context, const ::ProcessToCapture& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Empty>* AsyncStopCaptureRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Empty>* PrepareAsyncStopCaptureRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Availability>* AsyncStatusRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Availability>* PrepareAsyncStatusRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Empty>* AsyncShutdownRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Empty>* PrepareAsyncShutdownRaw(::grpc::ClientContext* context, const ::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::AudioService::AudioPacket>* StartCaptureRaw(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request) override;
+    ::grpc::ClientAsyncReader< ::AudioService::AudioPacket>* AsyncStartCaptureRaw(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::AudioService::AudioPacket>* PrepareAsyncStartCaptureRaw(::grpc::ClientContext* context, const ::AudioService::ProcessToCapture& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>* AsyncStopCaptureRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>* PrepareAsyncStopCaptureRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::AudioService::Availability>* AsyncStatusRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::AudioService::Availability>* PrepareAsyncStatusRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>* AsyncShutdownRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::AudioService::Empty>* PrepareAsyncShutdownRaw(::grpc::ClientContext* context, const ::AudioService::Empty& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_StartCapture_;
     const ::grpc::internal::RpcMethod rpcmethod_StopCapture_;
     const ::grpc::internal::RpcMethod rpcmethod_Status_;
@@ -163,10 +165,10 @@ class AudioCapture final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status StartCapture(::grpc::ServerContext* context, const ::ProcessToCapture* request, ::grpc::ServerWriter< ::AudioPacket>* writer);
-    virtual ::grpc::Status StopCapture(::grpc::ServerContext* context, const ::Empty* request, ::Empty* response);
-    virtual ::grpc::Status Status(::grpc::ServerContext* context, const ::Empty* request, ::Availability* response);
-    virtual ::grpc::Status Shutdown(::grpc::ServerContext* context, const ::Empty* request, ::Empty* response);
+    virtual ::grpc::Status StartCapture(::grpc::ServerContext* context, const ::AudioService::ProcessToCapture* request, ::grpc::ServerWriter< ::AudioService::AudioPacket>* writer);
+    virtual ::grpc::Status StopCapture(::grpc::ServerContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response);
+    virtual ::grpc::Status Status(::grpc::ServerContext* context, const ::AudioService::Empty* request, ::AudioService::Availability* response);
+    virtual ::grpc::Status Shutdown(::grpc::ServerContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_StartCapture : public BaseClass {
@@ -180,11 +182,11 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioPacket>* /*writer*/) override {
+    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::AudioService::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioService::AudioPacket>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestStartCapture(::grpc::ServerContext* context, ::ProcessToCapture* request, ::grpc::ServerAsyncWriter< ::AudioPacket>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestStartCapture(::grpc::ServerContext* context, ::AudioService::ProcessToCapture* request, ::grpc::ServerAsyncWriter< ::AudioService::AudioPacket>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncServerStreaming(0, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
@@ -200,11 +202,11 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestStopCapture(::grpc::ServerContext* context, ::Empty* request, ::grpc::ServerAsyncResponseWriter< ::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestStopCapture(::grpc::ServerContext* context, ::AudioService::Empty* request, ::grpc::ServerAsyncResponseWriter< ::AudioService::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -220,11 +222,11 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Availability* /*response*/) override {
+    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Availability* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestStatus(::grpc::ServerContext* context, ::Empty* request, ::grpc::ServerAsyncResponseWriter< ::Availability>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestStatus(::grpc::ServerContext* context, ::AudioService::Empty* request, ::grpc::ServerAsyncResponseWriter< ::AudioService::Availability>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -240,11 +242,11 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestShutdown(::grpc::ServerContext* context, ::Empty* request, ::grpc::ServerAsyncResponseWriter< ::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestShutdown(::grpc::ServerContext* context, ::AudioService::Empty* request, ::grpc::ServerAsyncResponseWriter< ::AudioService::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -256,20 +258,20 @@ class AudioCapture final {
    public:
     WithCallbackMethod_StartCapture() {
       ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackServerStreamingHandler< ::ProcessToCapture, ::AudioPacket>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::AudioService::ProcessToCapture, ::AudioService::AudioPacket>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::ProcessToCapture* request) { return this->StartCapture(context, request); }));
+                   ::grpc::CallbackServerContext* context, const ::AudioService::ProcessToCapture* request) { return this->StartCapture(context, request); }));
     }
     ~WithCallbackMethod_StartCapture() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioPacket>* /*writer*/) override {
+    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::AudioService::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioService::AudioPacket>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerWriteReactor< ::AudioPacket>* StartCapture(
-      ::grpc::CallbackServerContext* /*context*/, const ::ProcessToCapture* /*request*/)  { return nullptr; }
+    virtual ::grpc::ServerWriteReactor< ::AudioService::AudioPacket>* StartCapture(
+      ::grpc::CallbackServerContext* /*context*/, const ::AudioService::ProcessToCapture* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_StopCapture : public BaseClass {
@@ -278,25 +280,25 @@ class AudioCapture final {
    public:
     WithCallbackMethod_StopCapture() {
       ::grpc::Service::MarkMethodCallback(1,
-          new ::grpc::internal::CallbackUnaryHandler< ::Empty, ::Empty>(
+          new ::grpc::internal::CallbackUnaryHandler< ::AudioService::Empty, ::AudioService::Empty>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::Empty* request, ::Empty* response) { return this->StopCapture(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response) { return this->StopCapture(context, request, response); }));}
     void SetMessageAllocatorFor_StopCapture(
-        ::grpc::MessageAllocator< ::Empty, ::Empty>* allocator) {
+        ::grpc::MessageAllocator< ::AudioService::Empty, ::AudioService::Empty>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::Empty, ::Empty>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::AudioService::Empty, ::AudioService::Empty>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_StopCapture() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* StopCapture(
-      ::grpc::CallbackServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_Status : public BaseClass {
@@ -305,25 +307,25 @@ class AudioCapture final {
    public:
     WithCallbackMethod_Status() {
       ::grpc::Service::MarkMethodCallback(2,
-          new ::grpc::internal::CallbackUnaryHandler< ::Empty, ::Availability>(
+          new ::grpc::internal::CallbackUnaryHandler< ::AudioService::Empty, ::AudioService::Availability>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::Empty* request, ::Availability* response) { return this->Status(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::AudioService::Empty* request, ::AudioService::Availability* response) { return this->Status(context, request, response); }));}
     void SetMessageAllocatorFor_Status(
-        ::grpc::MessageAllocator< ::Empty, ::Availability>* allocator) {
+        ::grpc::MessageAllocator< ::AudioService::Empty, ::AudioService::Availability>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::Empty, ::Availability>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::AudioService::Empty, ::AudioService::Availability>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_Status() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Availability* /*response*/) override {
+    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Availability* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* Status(
-      ::grpc::CallbackServerContext* /*context*/, const ::Empty* /*request*/, ::Availability* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Availability* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_Shutdown : public BaseClass {
@@ -332,25 +334,25 @@ class AudioCapture final {
    public:
     WithCallbackMethod_Shutdown() {
       ::grpc::Service::MarkMethodCallback(3,
-          new ::grpc::internal::CallbackUnaryHandler< ::Empty, ::Empty>(
+          new ::grpc::internal::CallbackUnaryHandler< ::AudioService::Empty, ::AudioService::Empty>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::Empty* request, ::Empty* response) { return this->Shutdown(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::AudioService::Empty* request, ::AudioService::Empty* response) { return this->Shutdown(context, request, response); }));}
     void SetMessageAllocatorFor_Shutdown(
-        ::grpc::MessageAllocator< ::Empty, ::Empty>* allocator) {
+        ::grpc::MessageAllocator< ::AudioService::Empty, ::AudioService::Empty>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::Empty, ::Empty>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::AudioService::Empty, ::AudioService::Empty>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_Shutdown() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* Shutdown(
-      ::grpc::CallbackServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/)  { return nullptr; }
   };
   typedef WithCallbackMethod_StartCapture<WithCallbackMethod_StopCapture<WithCallbackMethod_Status<WithCallbackMethod_Shutdown<Service > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
@@ -366,7 +368,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioPacket>* /*writer*/) override {
+    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::AudioService::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioService::AudioPacket>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -383,7 +385,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -400,7 +402,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Availability* /*response*/) override {
+    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Availability* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -417,7 +419,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -434,7 +436,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioPacket>* /*writer*/) override {
+    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::AudioService::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioService::AudioPacket>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -454,7 +456,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -474,7 +476,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Availability* /*response*/) override {
+    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Availability* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -494,7 +496,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -517,7 +519,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioPacket>* /*writer*/) override {
+    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::AudioService::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioService::AudioPacket>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -539,7 +541,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -561,7 +563,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Availability* /*response*/) override {
+    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Availability* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -583,7 +585,7 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -598,10 +600,10 @@ class AudioCapture final {
     WithStreamedUnaryMethod_StopCapture() {
       ::grpc::Service::MarkMethodStreamed(1,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::Empty, ::Empty>(
+          ::AudioService::Empty, ::AudioService::Empty>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::Empty, ::Empty>* streamer) {
+                     ::AudioService::Empty, ::AudioService::Empty>* streamer) {
                        return this->StreamedStopCapture(context,
                          streamer);
                   }));
@@ -610,12 +612,12 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status StopCapture(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedStopCapture(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Empty,::Empty>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedStopCapture(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::AudioService::Empty,::AudioService::Empty>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_Status : public BaseClass {
@@ -625,10 +627,10 @@ class AudioCapture final {
     WithStreamedUnaryMethod_Status() {
       ::grpc::Service::MarkMethodStreamed(2,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::Empty, ::Availability>(
+          ::AudioService::Empty, ::AudioService::Availability>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::Empty, ::Availability>* streamer) {
+                     ::AudioService::Empty, ::AudioService::Availability>* streamer) {
                        return this->StreamedStatus(context,
                          streamer);
                   }));
@@ -637,12 +639,12 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Availability* /*response*/) override {
+    ::grpc::Status Status(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Availability* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedStatus(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Empty,::Availability>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedStatus(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::AudioService::Empty,::AudioService::Availability>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_Shutdown : public BaseClass {
@@ -652,10 +654,10 @@ class AudioCapture final {
     WithStreamedUnaryMethod_Shutdown() {
       ::grpc::Service::MarkMethodStreamed(3,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::Empty, ::Empty>(
+          ::AudioService::Empty, ::AudioService::Empty>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::Empty, ::Empty>* streamer) {
+                     ::AudioService::Empty, ::AudioService::Empty>* streamer) {
                        return this->StreamedShutdown(context,
                          streamer);
                   }));
@@ -664,12 +666,12 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::Empty* /*request*/, ::Empty* /*response*/) override {
+    ::grpc::Status Shutdown(::grpc::ServerContext* /*context*/, const ::AudioService::Empty* /*request*/, ::AudioService::Empty* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedShutdown(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Empty,::Empty>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedShutdown(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::AudioService::Empty,::AudioService::Empty>* server_unary_streamer) = 0;
   };
   typedef WithStreamedUnaryMethod_StopCapture<WithStreamedUnaryMethod_Status<WithStreamedUnaryMethod_Shutdown<Service > > > StreamedUnaryService;
   template <class BaseClass>
@@ -680,10 +682,10 @@ class AudioCapture final {
     WithSplitStreamingMethod_StartCapture() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::SplitServerStreamingHandler<
-          ::ProcessToCapture, ::AudioPacket>(
+          ::AudioService::ProcessToCapture, ::AudioService::AudioPacket>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerSplitStreamer<
-                     ::ProcessToCapture, ::AudioPacket>* streamer) {
+                     ::AudioService::ProcessToCapture, ::AudioService::AudioPacket>* streamer) {
                        return this->StreamedStartCapture(context,
                          streamer);
                   }));
@@ -692,16 +694,18 @@ class AudioCapture final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioPacket>* /*writer*/) override {
+    ::grpc::Status StartCapture(::grpc::ServerContext* /*context*/, const ::AudioService::ProcessToCapture* /*request*/, ::grpc::ServerWriter< ::AudioService::AudioPacket>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with split streamed
-    virtual ::grpc::Status StreamedStartCapture(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::ProcessToCapture,::AudioPacket>* server_split_streamer) = 0;
+    virtual ::grpc::Status StreamedStartCapture(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::AudioService::ProcessToCapture,::AudioService::AudioPacket>* server_split_streamer) = 0;
   };
   typedef WithSplitStreamingMethod_StartCapture<Service > SplitStreamedService;
   typedef WithSplitStreamingMethod_StartCapture<WithStreamedUnaryMethod_StopCapture<WithStreamedUnaryMethod_Status<WithStreamedUnaryMethod_Shutdown<Service > > > > StreamedService;
 };
+
+}  // namespace AudioService
 
 
 #endif  // GRPC_audio_5fcapture_5fservice_2eproto__INCLUDED

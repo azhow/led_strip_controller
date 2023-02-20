@@ -64,17 +64,17 @@ function spawnBackendProcess() {
   let spawn = require("child_process").spawn;
 
   let bat = spawn(".\\..\\python_env\\Scripts\\python.exe", [ ".\\..\\Controller\\main.py" ]);
-  
+
   bat.stdout.on("data", (data) => {
     // Handle data...
     console.log(`Data:\n${data}`);
   });
-  
+
   bat.stderr.on("data", (err) => {
     // Handle error...
     console.log(`Error:\n${err}`);
   });
-  
+
   bat.on("exit", (code) => {
     // Handle exit
     console.log(`Stdout:\n${code}`);
@@ -94,10 +94,10 @@ function grpc_main(mainWindow) {
        defaults: true,
        oneofs: true
       });
-  
+
   var illumiService = grpc.loadPackageDefinition(packageDefinition);
-  
-  var client = new illumiService.IllumiService('localhost:50051', grpc.credentials.createInsecure());
+
+  var client = new illumiService.ControllerService.LEDController('localhost:50051', grpc.credentials.createInsecure());
 
   client.waitForReady(Infinity, (err) => { server_ready(mainWindow, err); });
 

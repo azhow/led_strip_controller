@@ -9,30 +9,33 @@
 
 namespace AudioCaptureService
 {
-    class CaptureService final : public AudioCapture::Service
+    class CaptureService final : public AudioService::AudioCapturer::Service
     {
     public:
-        CaptureService(DWORD pid);
+        CaptureService();
 
-        grpc::Status StartCapture(grpc::ServerContext* context, 
-            const ProcessToCapture* request, 
-            grpc::ServerWriter<AudioPacket>* writer) override;
+        grpc::Status StartCapture(grpc::ServerContext* context,
+            const AudioService::ProcessToCapture* request,
+            grpc::ServerWriter<AudioService::AudioPacket>* writer) override;
 
-        grpc::Status StopCapture(grpc::ServerContext* context, 
-            const Empty* request, Empty* response) override;
-        
-        grpc::Status Status(grpc::ServerContext* context, 
-            const Empty* request, Availability* response) override;
-        
+        grpc::Status StopCapture(grpc::ServerContext* context,
+            const AudioService::Empty* request,
+            AudioService::Empty* response) override;
+
+        grpc::Status Status(grpc::ServerContext* context,
+            const AudioService::Empty* request,
+            AudioService::Availability* response) override;
+
         grpc::Status Shutdown(grpc::ServerContext* context,
-            const Empty* request, Empty* response) override;
+            const AudioService::Empty* request,
+            AudioService::Empty* response) override;
     private:
         std::unique_ptr<ProcessAudioCapturer> _capturer;
 
-        AudioPacket convertAudioPacket(
+        AudioService::AudioPacket convertAudioPacket(
             ProcessAudioCapturer::AudioPacket src) const;
 
-        void captureAction(grpc::ServerWriter<AudioPacket>* writer, 
+        void captureAction(grpc::ServerWriter<AudioService::AudioPacket>* writer,
             ProcessAudioCapturer::AudioPacket packet);
     };
 }

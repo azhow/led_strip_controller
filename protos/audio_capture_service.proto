@@ -1,7 +1,9 @@
 syntax = "proto3";
 
+package AudioService;
+
 // The greeting service definition.
-service AudioCapture {
+service AudioCapturer {
   rpc StartCapture(ProcessToCapture) returns (stream AudioPacket);
   rpc StopCapture(Empty) returns (Empty);
   rpc Status(Empty) returns (Availability);

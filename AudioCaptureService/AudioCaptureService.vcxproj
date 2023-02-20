@@ -164,9 +164,6 @@
     <ClInclude Include="proto\audio_capture_service.grpc.pb.h" />
     <ClInclude Include="proto\audio_capture_service.pb.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="proto\audio_capture_service.proto" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

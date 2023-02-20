@@ -20,6 +20,7 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
+namespace AudioService {
 PROTOBUF_CONSTEXPR ProcessToCapture::ProcessToCapture(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.pid_)*/0u
@@ -72,71 +73,75 @@ struct EmptyDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EmptyDefaultTypeInternal _Empty_default_instance_;
+}  // namespace AudioService
 static ::_pb::Metadata file_level_metadata_audio_5fcapture_5fservice_2eproto[4];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_audio_5fcapture_5fservice_2eproto[1];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_audio_5fcapture_5fservice_2eproto = nullptr;
 
 const uint32_t TableStruct_audio_5fcapture_5fservice_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::ProcessToCapture, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::AudioService::ProcessToCapture, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::ProcessToCapture, _impl_.pid_),
+  PROTOBUF_FIELD_OFFSET(::AudioService::ProcessToCapture, _impl_.pid_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::AudioPacket, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::AudioService::AudioPacket, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::AudioPacket, _impl_.timestamp_),
-  PROTOBUF_FIELD_OFFSET(::AudioPacket, _impl_.num_frames_),
-  PROTOBUF_FIELD_OFFSET(::AudioPacket, _impl_.captured_audio_),
+  PROTOBUF_FIELD_OFFSET(::AudioService::AudioPacket, _impl_.timestamp_),
+  PROTOBUF_FIELD_OFFSET(::AudioService::AudioPacket, _impl_.num_frames_),
+  PROTOBUF_FIELD_OFFSET(::AudioService::AudioPacket, _impl_.captured_audio_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Availability, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::AudioService::Availability, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Availability, _impl_.status_),
+  PROTOBUF_FIELD_OFFSET(::AudioService::Availability, _impl_.status_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Empty, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::AudioService::Empty, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::ProcessToCapture)},
-  { 7, -1, -1, sizeof(::AudioPacket)},
-  { 16, -1, -1, sizeof(::Availability)},
-  { 23, -1, -1, sizeof(::Empty)},
+  { 0, -1, -1, sizeof(::AudioService::ProcessToCapture)},
+  { 7, -1, -1, sizeof(::AudioService::AudioPacket)},
+  { 16, -1, -1, sizeof(::AudioService::Availability)},
+  { 23, -1, -1, sizeof(::AudioService::Empty)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::_ProcessToCapture_default_instance_._instance,
-  &::_AudioPacket_default_instance_._instance,
-  &::_Availability_default_instance_._instance,
-  &::_Empty_default_instance_._instance,
+  &::AudioService::_ProcessToCapture_default_instance_._instance,
+  &::AudioService::_AudioPacket_default_instance_._instance,
+  &::AudioService::_Availability_default_instance_._instance,
+  &::AudioService::_Empty_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_audio_5fcapture_5fservice_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\033audio_capture_service.proto\"\037\n\020Process"
-  "ToCapture\022\013\n\003pid\030\001 \001(\r\"L\n\013AudioPacket\022\021\n"
-  "\ttimestamp\030\001 \001(\004\022\022\n\nnum_frames\030\002 \001(\r\022\026\n\016"
-  "captured_audio\030\003 \001(\014\"3\n\014Availability\022#\n\006"
-  "status\030\001 \001(\0162\023.AvailabilityStatus\"\007\n\005Emp"
-  "ty*4\n\022AvailabilityStatus\022\r\n\tAVAILABLE\020\000\022"
-  "\017\n\013UNAVAILABLE\020\0012\235\001\n\014AudioCapture\0221\n\014Sta"
-  "rtCapture\022\021.ProcessToCapture\032\014.AudioPack"
-  "et0\001\022\035\n\013StopCapture\022\006.Empty\032\006.Empty\022\037\n\006S"
-  "tatus\022\006.Empty\032\r.Availability\022\032\n\010Shutdown"
-  "\022\006.Empty\032\006.Emptyb\006proto3"
+  "\n\033audio_capture_service.proto\022\014AudioServ"
+  "ice\"\037\n\020ProcessToCapture\022\013\n\003pid\030\001 \001(\r\"L\n\013"
+  "AudioPacket\022\021\n\ttimestamp\030\001 \001(\004\022\022\n\nnum_fr"
+  "ames\030\002 \001(\r\022\026\n\016captured_audio\030\003 \001(\014\"@\n\014Av"
+  "ailability\0220\n\006status\030\001 \001(\0162 .AudioServic"
+  "e.AvailabilityStatus\"\007\n\005Empty*4\n\022Availab"
+  "ilityStatus\022\r\n\tAVAILABLE\020\000\022\017\n\013UNAVAILABL"
+  "E\020\0012\206\002\n\rAudioCapturer\022K\n\014StartCapture\022\036."
+  "AudioService.ProcessToCapture\032\031.AudioSer"
+  "vice.AudioPacket0\001\0227\n\013StopCapture\022\023.Audi"
+  "oService.Empty\032\023.AudioService.Empty\0229\n\006S"
+  "tatus\022\023.AudioService.Empty\032\032.AudioServic"
+  "e.Availability\0224\n\010Shutdown\022\023.AudioServic"
+  "e.Empty\032\023.AudioService.Emptyb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_audio_5fcapture_5fservice_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_audio_5fcapture_5fservice_2eproto = {
-    false, false, 424, descriptor_table_protodef_audio_5fcapture_5fservice_2eproto,
+    false, false, 556, descriptor_table_protodef_audio_5fcapture_5fservice_2eproto,
     "audio_capture_service.proto",
     &descriptor_table_audio_5fcapture_5fservice_2eproto_once, nullptr, 0, 4,
     schemas, file_default_instances, TableStruct_audio_5fcapture_5fservice_2eproto::offsets,
@@ -149,6 +154,7 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_audio_5f
 
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_audio_5fcapture_5fservice_2eproto(&descriptor_table_audio_5fcapture_5fservice_2eproto);
+namespace AudioService {
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* AvailabilityStatus_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_audio_5fcapture_5fservice_2eproto);
   return file_level_enum_descriptors_audio_5fcapture_5fservice_2eproto[0];
@@ -174,7 +180,7 @@ ProcessToCapture::ProcessToCapture(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:ProcessToCapture)
+  // @@protoc_insertion_point(arena_constructor:AudioService.ProcessToCapture)
 }
 ProcessToCapture::ProcessToCapture(const ProcessToCapture& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -185,7 +191,7 @@ ProcessToCapture::ProcessToCapture(const ProcessToCapture& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.pid_ = from._impl_.pid_;
-  // @@protoc_insertion_point(copy_constructor:ProcessToCapture)
+  // @@protoc_insertion_point(copy_constructor:AudioService.ProcessToCapture)
 }
 
 inline void ProcessToCapture::SharedCtor(
@@ -199,7 +205,7 @@ inline void ProcessToCapture::SharedCtor(
 }
 
 ProcessToCapture::~ProcessToCapture() {
-  // @@protoc_insertion_point(destructor:ProcessToCapture)
+  // @@protoc_insertion_point(destructor:AudioService.ProcessToCapture)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -216,7 +222,7 @@ void ProcessToCapture::SetCachedSize(int size) const {
 }
 
 void ProcessToCapture::Clear() {
-// @@protoc_insertion_point(message_clear_start:ProcessToCapture)
+// @@protoc_insertion_point(message_clear_start:AudioService.ProcessToCapture)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -264,7 +270,7 @@ failure:
 
 uint8_t* ProcessToCapture::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:ProcessToCapture)
+  // @@protoc_insertion_point(serialize_to_array_start:AudioService.ProcessToCapture)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -278,12 +284,12 @@ uint8_t* ProcessToCapture::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:ProcessToCapture)
+  // @@protoc_insertion_point(serialize_to_array_end:AudioService.ProcessToCapture)
   return target;
 }
 
 size_t ProcessToCapture::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:ProcessToCapture)
+// @@protoc_insertion_point(message_byte_size_start:AudioService.ProcessToCapture)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -308,7 +314,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ProcessToCapture::GetClassData
 void ProcessToCapture::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<ProcessToCapture*>(&to_msg);
   auto& from = static_cast<const ProcessToCapture&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:ProcessToCapture)
+  // @@protoc_insertion_point(class_specific_merge_from_start:AudioService.ProcessToCapture)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -320,7 +326,7 @@ void ProcessToCapture::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
 }
 
 void ProcessToCapture::CopyFrom(const ProcessToCapture& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:ProcessToCapture)
+// @@protoc_insertion_point(class_specific_copy_from_start:AudioService.ProcessToCapture)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -352,7 +358,7 @@ AudioPacket::AudioPacket(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:AudioPacket)
+  // @@protoc_insertion_point(arena_constructor:AudioService.AudioPacket)
 }
 AudioPacket::AudioPacket(const AudioPacket& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -375,7 +381,7 @@ AudioPacket::AudioPacket(const AudioPacket& from)
   ::memcpy(&_impl_.timestamp_, &from._impl_.timestamp_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.num_frames_) -
     reinterpret_cast<char*>(&_impl_.timestamp_)) + sizeof(_impl_.num_frames_));
-  // @@protoc_insertion_point(copy_constructor:AudioPacket)
+  // @@protoc_insertion_point(copy_constructor:AudioService.AudioPacket)
 }
 
 inline void AudioPacket::SharedCtor(
@@ -395,7 +401,7 @@ inline void AudioPacket::SharedCtor(
 }
 
 AudioPacket::~AudioPacket() {
-  // @@protoc_insertion_point(destructor:AudioPacket)
+  // @@protoc_insertion_point(destructor:AudioService.AudioPacket)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -413,7 +419,7 @@ void AudioPacket::SetCachedSize(int size) const {
 }
 
 void AudioPacket::Clear() {
-// @@protoc_insertion_point(message_clear_start:AudioPacket)
+// @@protoc_insertion_point(message_clear_start:AudioService.AudioPacket)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -481,7 +487,7 @@ failure:
 
 uint8_t* AudioPacket::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:AudioPacket)
+  // @@protoc_insertion_point(serialize_to_array_start:AudioService.AudioPacket)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -507,12 +513,12 @@ uint8_t* AudioPacket::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:AudioPacket)
+  // @@protoc_insertion_point(serialize_to_array_end:AudioService.AudioPacket)
   return target;
 }
 
 size_t AudioPacket::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:AudioPacket)
+// @@protoc_insertion_point(message_byte_size_start:AudioService.AudioPacket)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -549,7 +555,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AudioPacket::GetClassData() co
 void AudioPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<AudioPacket*>(&to_msg);
   auto& from = static_cast<const AudioPacket&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:AudioPacket)
+  // @@protoc_insertion_point(class_specific_merge_from_start:AudioService.AudioPacket)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -567,7 +573,7 @@ void AudioPacket::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PR
 }
 
 void AudioPacket::CopyFrom(const AudioPacket& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:AudioPacket)
+// @@protoc_insertion_point(class_specific_copy_from_start:AudioService.AudioPacket)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -610,7 +616,7 @@ Availability::Availability(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:Availability)
+  // @@protoc_insertion_point(arena_constructor:AudioService.Availability)
 }
 Availability::Availability(const Availability& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -621,7 +627,7 @@ Availability::Availability(const Availability& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.status_ = from._impl_.status_;
-  // @@protoc_insertion_point(copy_constructor:Availability)
+  // @@protoc_insertion_point(copy_constructor:AudioService.Availability)
 }
 
 inline void Availability::SharedCtor(
@@ -635,7 +641,7 @@ inline void Availability::SharedCtor(
 }
 
 Availability::~Availability() {
-  // @@protoc_insertion_point(destructor:Availability)
+  // @@protoc_insertion_point(destructor:AudioService.Availability)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -652,7 +658,7 @@ void Availability::SetCachedSize(int size) const {
 }
 
 void Availability::Clear() {
-// @@protoc_insertion_point(message_clear_start:Availability)
+// @@protoc_insertion_point(message_clear_start:AudioService.Availability)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -667,12 +673,12 @@ const char* Availability::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .AvailabilityStatus status = 1;
+      // .AudioService.AvailabilityStatus status = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_status(static_cast<::AvailabilityStatus>(val));
+          _internal_set_status(static_cast<::AudioService::AvailabilityStatus>(val));
         } else
           goto handle_unusual;
         continue;
@@ -701,11 +707,11 @@ failure:
 
 uint8_t* Availability::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Availability)
+  // @@protoc_insertion_point(serialize_to_array_start:AudioService.Availability)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .AvailabilityStatus status = 1;
+  // .AudioService.AvailabilityStatus status = 1;
   if (this->_internal_status() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
@@ -716,19 +722,19 @@ uint8_t* Availability::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Availability)
+  // @@protoc_insertion_point(serialize_to_array_end:AudioService.Availability)
   return target;
 }
 
 size_t Availability::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Availability)
+// @@protoc_insertion_point(message_byte_size_start:AudioService.Availability)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .AvailabilityStatus status = 1;
+  // .AudioService.AvailabilityStatus status = 1;
   if (this->_internal_status() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_status());
@@ -747,7 +753,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Availability::GetClassData() c
 void Availability::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Availability*>(&to_msg);
   auto& from = static_cast<const Availability&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Availability)
+  // @@protoc_insertion_point(class_specific_merge_from_start:AudioService.Availability)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -759,7 +765,7 @@ void Availability::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::P
 }
 
 void Availability::CopyFrom(const Availability& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Availability)
+// @@protoc_insertion_point(class_specific_copy_from_start:AudioService.Availability)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -790,13 +796,13 @@ class Empty::_Internal {
 Empty::Empty(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
-  // @@protoc_insertion_point(arena_constructor:Empty)
+  // @@protoc_insertion_point(arena_constructor:AudioService.Empty)
 }
 Empty::Empty(const Empty& from)
   : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
   Empty* const _this = this; (void)_this;
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:Empty)
+  // @@protoc_insertion_point(copy_constructor:AudioService.Empty)
 }
 
 
@@ -822,22 +828,23 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Empty::GetClassData() const { 
 }
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace AudioService
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::ProcessToCapture*
-Arena::CreateMaybeMessage< ::ProcessToCapture >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::ProcessToCapture >(arena);
+template<> PROTOBUF_NOINLINE ::AudioService::ProcessToCapture*
+Arena::CreateMaybeMessage< ::AudioService::ProcessToCapture >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::AudioService::ProcessToCapture >(arena);
 }
-template<> PROTOBUF_NOINLINE ::AudioPacket*
-Arena::CreateMaybeMessage< ::AudioPacket >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::AudioPacket >(arena);
+template<> PROTOBUF_NOINLINE ::AudioService::AudioPacket*
+Arena::CreateMaybeMessage< ::AudioService::AudioPacket >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::AudioService::AudioPacket >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Availability*
-Arena::CreateMaybeMessage< ::Availability >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Availability >(arena);
+template<> PROTOBUF_NOINLINE ::AudioService::Availability*
+Arena::CreateMaybeMessage< ::AudioService::Availability >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::AudioService::Availability >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Empty*
-Arena::CreateMaybeMessage< ::Empty >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Empty >(arena);
+template<> PROTOBUF_NOINLINE ::AudioService::Empty*
+Arena::CreateMaybeMessage< ::AudioService::Empty >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::AudioService::Empty >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 
