@@ -130,3 +130,6 @@ out/
 .vscode/*
 
 python_env/*
+
+AudioCaptureService/.vs/*
+AudioCaptureService/x64/*

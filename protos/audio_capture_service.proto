@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+// The greeting service definition.
+service AudioCapture {
+  rpc StartCapture(ProcessToCapture) returns (stream AudioPacket);
+  rpc StopCapture(Empty) returns (Empty);
+  rpc Status(Empty) returns (Availability);
+  rpc Shutdown(Empty) returns (Empty);
+}
+
+message ProcessToCapture {
+  uint32 pid = 1;
+}
+
+message AudioPacket {
+  uint64 timestamp = 1;
+  uint32 num_frames = 2;
+  bytes  captured_audio = 3;
+}
+
+enum AvailabilityStatus {
+  AVAILABLE = 0;
+  UNAVAILABLE = 1;
+}
+
+message Availability {
+  AvailabilityStatus status = 1;
+}
+
+message Empty {
+
+}
