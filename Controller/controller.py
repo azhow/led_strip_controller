@@ -85,7 +85,7 @@ class MexllexLEDStripController:
                     if command == "exit":
                         return
 
-                    await self.send_command(client, command)
+                    await self._send_command(client, command)
                     self.queue.task_done()
         except Exception as e:
             print("Error: {}".format(e))
@@ -102,7 +102,7 @@ class MexllexLEDStripController:
 
         return device            
 
-    async def send_command(self, client, command):
+    async def _send_command(self, client, command):
         """Sends a hex number representing a command to the device.
 
         Args:
@@ -124,7 +124,7 @@ class MexllexLEDStripController:
             print("Error executing command {0}: {1}".format(hex(int.from_bytes(command, 'big')), e))
 
     def set_color(self, color):
-        assert len(color) == 3, "Color has number of channels different than 3 (R,G,B): {0}".format(color)
+        assert len(color) == 4, "Color has number of channels different than 4 (R,G,B,A): {0}".format(color)
         for c in color:
             assert 0 <= c < 256, "Channel outside of valid range [0, 255]"
         

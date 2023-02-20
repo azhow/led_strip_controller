@@ -82,7 +82,7 @@ function spawnBackendProcess() {
 }
 
 function grpc_main(mainWindow) {
-  var PROTO_PATH = __dirname + '/../../../protoc/test.proto';
+  var PROTO_PATH = __dirname + '/../../../protos/led_controller_service.proto';
 
   var grpc = require('@grpc/grpc-js');
   var protoLoader = require('@grpc/proto-loader');
@@ -95,9 +95,9 @@ function grpc_main(mainWindow) {
        oneofs: true
       });
   
-  var hello_proto = grpc.loadPackageDefinition(packageDefinition);
+  var illumiService = grpc.loadPackageDefinition(packageDefinition);
   
-  var client = new hello_proto.Greeter('localhost:50051', grpc.credentials.createInsecure());
+  var client = new illumiService.IllumiService('localhost:50051', grpc.credentials.createInsecure());
 
   client.waitForReady(Infinity, (err) => { server_ready(mainWindow, err); });
 
@@ -117,7 +117,7 @@ function server_not_ready(mainWindow, err) {
 }
 
 function setColor(client, color_rgb) {
-  client.setColor({rgb_color: [color_rgb.r, color_rgb.g, color_rgb.b]}, function(err, response) {
+  client.setColor({rgba_color: [color_rgb.r, color_rgb.g, color_rgb.b, 0]}, function(err, response) {
     if (err) console.log('Error:', err);
   });
 }

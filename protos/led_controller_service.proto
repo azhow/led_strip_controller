@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+service IllumiService {
+  rpc SetColor(Color) returns (Empty);
+  rpc GetColor(Empty) returns (Color);
+  rpc Status(Empty) returns (Availability);
+}
+
+message Color {
+  repeated uint32 rgba_color = 1;
+}
+
+enum AvailabilityStatus {
+  ALL_AVAILABLE = 0;
+  AUDIO_CAPTURE_UNAVAILABLE = 1;
+  ALL_UNAVAILABLE = 2;
+}
+
+message Availability {
+  AvailabilityStatus status = 1;
+}
+
+message Empty {
+
+}

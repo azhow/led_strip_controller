@@ -3,18 +3,18 @@ import logging
 
 from concurrent import futures
 
-import test_pb2
-import test_pb2_grpc
+import led_controller_service_pb2
+import led_controller_service_pb2_grpc
 import controller
 
 
 controller = controller.MexllexLEDStripController(verbose=True)
 
-class Greeter(test_pb2_grpc.GreeterServicer):
+class IllumiServicer(led_controller_service_pb2_grpc.IllumiService):
 
     def SetColor(self, request, context):
-        controller.set_color(request.rgb_color)
-        return test_pb2.HelloReply(message='Setting color: {}.'.format(request.rgb_color))
+        controller.set_color(request.rgba_color)
+        return led_controller_service_pb2.Empty()
 
     # def SayHelloAgain(self, request, context):
     #     return Controller.test_pb2.HelloReply(message='Hello again, %s!' % request.name)
@@ -23,7 +23,7 @@ class Greeter(test_pb2_grpc.GreeterServicer):
 def serve():
     port = '50051'
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    test_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
+    led_controller_service_pb2_grpc.add_IllumiServiceServicer_to_server(IllumiServicer(), server)
     server.add_insecure_port('[::]:' + port)
     server.start()
     print("Server started, listening on " + port)
