@@ -42,7 +42,7 @@ def runAudioClient():
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             # Start the load operations and mark each future with its URL
             executor.submit(interactive_audio.captureAudio, stub)
-            interactive_audio.setupPlot()
+            interactive_audio.setupFreqPlot()
 
     audioCapturerServerProcess.kill()
 
