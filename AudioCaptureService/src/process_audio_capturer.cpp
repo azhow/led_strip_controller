@@ -80,8 +80,8 @@ void ProcessAudioCapturer::forwardPacket()
 		// Send forward data to processing
 		if (!(packet.flags & AUDCLNT_BUFFERFLAGS_SILENT))
 		{
-			packet.size = packet.nFrames * static_cast<std::uint64_t>(
-				_format.nChannels);
+			packet.size = packet.nFrames * static_cast<std::size_t>(
+				_format.nBlockAlign);
 			_captureAction(packet);
 		}
 
@@ -170,7 +170,7 @@ WAVEFORMATEX ProcessAudioCapturer::initializeFormat() const
     format.nSamplesPerSec = deviceFormatProperties->nSamplesPerSec;
 
     format.nBlockAlign = format.nChannels * sizeof(float);
-    format.nAvgBytesPerSec = format.nSamplesPerSec * _format.nBlockAlign;
+    format.nAvgBytesPerSec = format.nSamplesPerSec * format.nBlockAlign;
     format.wBitsPerSample = CHAR_BIT * sizeof(float);
     format.cbSize = 0;
 
@@ -183,6 +183,8 @@ void ProcessAudioCapturer::startCapture(std::uint32_t pid,
 	_pid = pid;
 	_captureAction = action;
 	_captureThread = std::thread(&ProcessAudioCapturer::captureSafe, this);
+
+	_captureThread.join();
 }
 
 void ProcessAudioCapturer::stopCapture()
