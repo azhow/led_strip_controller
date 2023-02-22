@@ -4,6 +4,29 @@ import audio_capture_service_pb2
 import numpy as np
 import scipy.fft
 
+class LEDDancer():
+    def __init__(self):
+        self.colors = [[148, 0, 211, 0], [75, 0, 130, 0], [0, 0, 255, 0], [0, 255, 0, 0], [255, 255, 0, 0], [255, 127, 0, 0]]
+        self.frequencies = [60, 250, 500, 2000, 4000, 6000]
+        self.window = np.zeros((17, 4))
+        self.curr_packet = np.array([])
+
+    def captureAudio(self, stub, controller):
+        print("Received data")
+        packets = stub.StartCapture(audio_capture_service_pb2.ProcessToCapture(pid=19032))
+        self.curr_color = np.array(self.colors[0][0])
+        for p in packets:
+            buffer = np.frombuffer(p.captured_audio, dtype=np.float32)
+            self.curr_packet = np.average(buffer.reshape(-1, 2), axis=1)
+            yf = scipy.fft.rfft(self.curr_packet) / p.num_frames
+            xf = scipy.fft.rfftfreq(p.num_frames, d=1./192000)
+            strongest_freq = xf[np.argmax(yf)]
+            new_color = np.array([np.interp(strongest_freq, self.frequencies, np.take(self.colors, i, axis=1)) for i in range(4)]).reshape(1, 4)
+            self.window = np.append(self.window[1:], new_color, axis=0)
+            self.curr_color = np.mean(self.window, axis=0)
+            controller.set_color(self.curr_color)
+
+
 class AudioVisualizer():
     def __init__(self):
         self.curr_packet = np.array([])
@@ -14,7 +37,6 @@ class AudioVisualizer():
         for p in packets:
             buffer = np.frombuffer(p.captured_audio, dtype=np.float32)
             self.curr_packet = np.average(buffer.reshape(-1, 2), axis=1)
-            #self.curr_packet = np.array([self.generate_sine_wave(20000, 441), self.generate_sine_wave(20000, 441)], dtype=np.float32).T
 
     def frequency_visualization(self):
         # Create figure for plotting

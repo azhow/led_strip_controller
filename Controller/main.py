@@ -9,10 +9,11 @@ import audio_capture_service_pb2
 import audio_capture_service_pb2_grpc
 import led_controller_service_pb2
 import led_controller_service_pb2_grpc
-import controller
+import controller as led_ctrl
 import interactive_audio
 
-controller = controller.MexllexLEDStripController(verbose=True)
+
+controller = led_ctrl.MexllexLEDStripController(verbose=False)
 controller.set_color([0, 0, 0, 0])
 
 class LEDControllerServicer(led_controller_service_pb2_grpc.LEDController):
@@ -32,7 +33,7 @@ def serve():
     server.wait_for_termination()
 
 
-def runAudioClient():
+def runAudioClientVisualizer():
     #audioCapturerServerProcess = Popen("./../AudioCaptureService/x64/Debug/AudioCaptureService.exe")
     audioCapturerServerProcess = Popen("./led_strip_controller/AudioCaptureService/x64/Debug/AudioCaptureService.exe")
 
@@ -45,6 +46,21 @@ def runAudioClient():
             executor.submit(visualizer.captureAudio, stub)
             visualizer.frequency_visualization()
             #interactive_audio.write_file()
+
+    audioCapturerServerProcess.kill()
+
+
+def runAudioClient():
+    #audioCapturerServerProcess = Popen("./../AudioCaptureService/x64/Debug/AudioCaptureService.exe")
+    audioCapturerServerProcess = Popen("./led_strip_controller/AudioCaptureService/x64/Debug/AudioCaptureService.exe")
+
+    dancer = interactive_audio.LEDDancer()
+    with grpc.insecure_channel('localhost:42069') as channel:
+        stub = audio_capture_service_pb2_grpc.AudioCapturerStub(channel)
+        print("-------------- CaptureAudio --------------")
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+            # Start the load operations and mark each future with its URL
+            executor.submit(dancer.captureAudio, stub, controller)
 
     audioCapturerServerProcess.kill()
 
