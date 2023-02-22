@@ -167,7 +167,7 @@ WAVEFORMATEX ProcessAudioCapturer::initializeFormat() const
 	WAVEFORMATEX format{};
     format.wFormatTag = WAVE_FORMAT_IEEE_FLOAT;
     format.nChannels = deviceFormatProperties->nChannels;
-    format.nSamplesPerSec = deviceFormatProperties->nSamplesPerSec;
+    format.nSamplesPerSec = 192000;
 
     format.nBlockAlign = format.nChannels * sizeof(float);
     format.nAvgBytesPerSec = format.nSamplesPerSec * format.nBlockAlign;

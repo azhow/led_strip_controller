@@ -36,13 +36,15 @@ def runAudioClient():
     #audioCapturerServerProcess = Popen("./../AudioCaptureService/x64/Debug/AudioCaptureService.exe")
     audioCapturerServerProcess = Popen("./led_strip_controller/AudioCaptureService/x64/Debug/AudioCaptureService.exe")
 
+    visualizer = interactive_audio.AudioVisualizer()
     with grpc.insecure_channel('localhost:42069') as channel:
         stub = audio_capture_service_pb2_grpc.AudioCapturerStub(channel)
         print("-------------- CaptureAudio --------------")
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             # Start the load operations and mark each future with its URL
-            executor.submit(interactive_audio.captureAudio, stub)
-            interactive_audio.setupFreqPlot()
+            executor.submit(visualizer.captureAudio, stub)
+            visualizer.frequency_visualization()
+            #interactive_audio.write_file()
 
     audioCapturerServerProcess.kill()
 
